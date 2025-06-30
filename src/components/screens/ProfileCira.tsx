@@ -81,6 +81,7 @@ type Founder = {
     projects?: { title: string; desc: string }[];
     github?: string;
     linkedin?: string;
+    sideProjects?: string[];
 };
 
 function CiraDiscoveryScreen({ modalFounder, setModalFounder }: { modalFounder: Founder | null, setModalFounder: (f: Founder | null) => void }) {
@@ -102,6 +103,14 @@ function CiraDiscoveryScreen({ modalFounder, setModalFounder }: { modalFounder: 
             location: "NYC, Remote",
             availability: "Full-time",
             interest: 0,
+            projects: [
+                { title: "SaaSify", desc: "Subscription billing for startups." },
+                { title: "AI Chatbot", desc: "Conversational AI for support teams." }
+            ],
+            sideProjects: [
+                "https://alexkim.dev/side1",
+                "https://alexkim.dev/side2"
+            ]
         },
         {
             id: 2,
@@ -119,6 +128,14 @@ function CiraDiscoveryScreen({ modalFounder, setModalFounder }: { modalFounder: 
             location: "SF, Hybrid",
             availability: "Part-time",
             interest: 0,
+            projects: [
+                { title: "Paywise", desc: "Payments for the unbanked." },
+                { title: "DesignHub", desc: "A portfolio builder for designers." }
+            ],
+            sideProjects: [
+                "https://priyapatel.com/side1",
+                "https://priyapatel.com/side2"
+            ]
         },
         // ...more founders
     ];
@@ -231,12 +248,12 @@ function CiraDiscoveryScreen({ modalFounder, setModalFounder }: { modalFounder: 
                 </div>
             )}
             {/* Founder grid */}
-            <div className="flex flex-col items-center gap-6 py-6 px-2 overflow-y-auto">
+            <div className="flex flex-col items-center gap-6 py-6 px-2 overflow-y-auto pb-20">
                 {filteredFounders.map((f, idx) => (
                     <div
                         key={f.id}
                         onClick={() => setModalFounder(f)}
-                        className="cursor-pointer min-w-[260px] max-w-[340px] w-full p-6 rounded-2xl bg-[#f9f9f9] transition-all flex flex-col items-center"
+                        className="cursor-pointer min-w-[260px] max-w-[340px] w-full p-6 rounded-2xl bg-[#f9f9f9] hover:bg-emerald-50/30 transition-all flex flex-col items-center"
                     >
                         <div className="relative mb-5 flex justify-center">
                             <img src={f.photo} alt={f.name} className="w-16 h-16 rounded-2xl border-2 border-gray-50 shadow" />
@@ -262,92 +279,96 @@ function CiraDiscoveryScreen({ modalFounder, setModalFounder }: { modalFounder: 
             </div>
             {/* Modal */}
             {modalFounder && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-                    <div className="bg-white rounded-3xl p-8 max-w-[340px] w-full shadow-2xl relative flex flex-col items-center">
-                        <button className="absolute top-4 right-4 w-11 h-11 bg-transparent border-none text-3xl text-emerald-500 cursor-pointer" onClick={() => setModalFounder(null)}>&times;</button>
-                        <div className="relative mb-5">
-                            <img src={modalFounder.photo} alt={modalFounder.name} className="w-20 h-20 rounded-2xl border-2 border-gray-50 shadow" />
-                            {modalFounder.verified && (
-                                <span className="absolute -bottom-1 -right-1 w-7 h-7 bg-emerald-500 border-2 border-white rounded-full flex items-center justify-center shadow text-white">
-                                    <CheckCircle size={20} weight="fill" />
-                                </span>
-                            )}
-                        </div>
-                        <div className="text-xl font-semibold text-gray-900 mb-1">{modalFounder.name}</div>
-                        <div className="text-emerald-500 font-medium text-base mb-4">{modalFounder.status}</div>
-                        <div className="text-base text-gray-700 mb-3 text-center">{modalFounder.project || modalFounder.quote}</div>
-                        <div className="text-xs text-gray-500 mb-6">{modalFounder.location} &middot; {modalFounder.availability}</div>
-                        <div className="flex flex-wrap gap-2 mb-6">
-                            {modalFounder.skills.map(s => (
-                                <span key={s.name} className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-medium border border-emerald-200 bg-emerald-50 text-emerald-600 gap-1">
-                                    {skillIcon(s.verification, 'emerald-500')} {s.name}
-                                </span>
-                            ))}
-                        </div>
-                        {/* Additional profile info sections */}
-                        <div className="w-full mb-4">
-                            <div className="font-semibold text-emerald-500 text-sm mb-1">Education</div>
-                            <div className="text-gray-700 text-sm">{modalFounder.education || 'Stanford University, B.S. Computer Science'}</div>
-                        </div>
-                        <div className="w-full mb-4">
-                            <div className="font-semibold text-emerald-500 text-sm mb-1">Credentials</div>
-                            <div className="flex flex-wrap gap-2">
-                                {(modalFounder.credentials || ['Y Combinator S21', 'Ex-Google', 'AWS Certified']).map((cred, i) => (
-                                    <span key={cred} className="bg-emerald-50 text-emerald-600 rounded-md px-3 py-1 text-xs font-medium">{cred}</span>
+                <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/40">
+                    <div className="bg-white rounded-3xl max-w-[340px] w-full shadow-2xl relative flex flex-col items-center max-h-[90vh]">
+                        <button className="absolute top-4 right-4 w-11 h-11 bg-white border border-emerald-100 rounded-full text-3xl text-emerald-500 cursor-pointer shadow z-50" onClick={() => setModalFounder(null)} aria-label="Close">&times;</button>
+                        <div className="w-full px-4 pt-16 pb-28 overflow-y-auto" style={{ maxHeight: '80vh' }}>
+                            <div className="relative mb-5 flex flex-col items-center">
+                                <div className="relative">
+                                    <img src={modalFounder.photo} alt={modalFounder.name} className="w-20 h-20 rounded-2xl border-2 border-gray-50 shadow" />
+                                    {modalFounder.verified && (
+                                        <span className="absolute -bottom-2 -right-2 w-7 h-7 bg-emerald-500 border-2 border-white rounded-full flex items-center justify-center shadow text-white">
+                                            <CheckCircle size={20} weight="fill" />
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="text-xl font-semibold text-gray-900 mb-1 text-center">{modalFounder.name}</div>
+                            <div className="text-emerald-500 font-medium text-base mb-4 text-center">{modalFounder.status}</div>
+                            <div className="text-base text-gray-700 mb-3 text-center">{modalFounder.project || modalFounder.quote}</div>
+                            <div className="text-xs text-gray-500 mb-6 text-center">{modalFounder.location} &middot; {modalFounder.availability}</div>
+                            <div className="flex flex-wrap gap-2 mb-6 justify-center">
+                                {modalFounder.skills.map(s => (
+                                    <span key={s.name} className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-medium border border-emerald-200 bg-emerald-50 text-emerald-600 gap-1">
+                                        {skillIcon(s.verification, 'emerald-500')} {s.name}
+                                    </span>
                                 ))}
                             </div>
-                        </div>
-                        <div className="w-full mb-4 flex gap-4">
-                            <div className="flex-1">
+                            {/* Live Project Demos section */}
+                            {modalFounder.projects && modalFounder.projects.length > 0 && (
+                                <div className="w-full mb-4">
+                                    <div className="font-semibold text-emerald-500 text-sm mb-1">Live Project Demos</div>
+                                    <div className="flex flex-col gap-2">
+                                        {modalFounder.projects.map((p, i) => (
+                                            <div key={p.title} className="flex items-center gap-3 bg-gray-50 rounded-md p-2">
+                                                <div className="w-10 h-10 bg-gray-200 rounded-md flex items-center justify-center text-gray-400 text-base font-bold">IMG</div>
+                                                <div>
+                                                    <div className="text-emerald-600 font-semibold text-sm">{p.title}</div>
+                                                    <div className="text-gray-700 text-xs">{p.desc}</div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                            {/* Side Projects section */}
+                            {modalFounder.sideProjects && modalFounder.sideProjects.length > 0 && (
+                                <div className="w-full mb-4">
+                                    <div className="font-semibold text-emerald-500 text-sm mb-1">Side Projects</div>
+                                    <div className="flex flex-col gap-2">
+                                        {modalFounder.sideProjects.map((link, i) => (
+                                            <a key={link} href={link} target="_blank" rel="noopener noreferrer" className="text-emerald-600 underline text-sm break-all">{link}</a>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                            {/* Experience, Funding, Open To, Looking For, Mutual Connections, Links, Action Buttons remain unchanged */}
+                            <div className="w-full mb-4">
                                 <div className="font-semibold text-emerald-500 text-sm mb-1">Experience</div>
                                 <div className="text-gray-700 text-sm">{modalFounder.experience || '7 years'}</div>
                             </div>
-                            <div className="flex-1">
+                            <div className="w-full mb-4">
                                 <div className="font-semibold text-emerald-500 text-sm mb-1">Funding</div>
                                 <div className="text-gray-700 text-sm">{modalFounder.funding || '$250k pre-seed raised'}</div>
                             </div>
-                        </div>
-                        <div className="w-full mb-4">
-                            <div className="font-semibold text-emerald-500 text-sm mb-1">Open To</div>
-                            <div className="text-gray-700 text-sm">{(modalFounder.openTo || ['Remote', 'Hybrid']).join(', ')}</div>
-                        </div>
-                        <div className="w-full mb-4">
-                            <div className="font-semibold text-emerald-500 text-sm mb-1">Looking For</div>
-                            <div className="text-gray-700 text-sm">{(modalFounder.lookingFor || ['Business Co-founder', 'Go-to-Market', 'Fundraising']).join(', ')}</div>
-                        </div>
-                        <div className="w-full mb-4">
-                            <div className="font-semibold text-emerald-500 text-sm mb-1">Mutual Connections</div>
-                            <div className="text-gray-700 text-sm">{modalFounder.mutualConnections || 3}</div>
-                        </div>
-                        <div className="w-full mb-4">
-                            <div className="font-semibold text-emerald-500 text-sm mb-1">Projects</div>
-                            <div className="flex flex-col gap-2">
-                                {(modalFounder.projects || [{ title: 'SaaSify', desc: 'Subscription billing for startups.' }, { title: 'AI Chatbot', desc: 'Conversational AI for support teams.' }]).map((p, i) => (
-                                    <div key={p.title} className="flex items-center gap-3 bg-gray-50 rounded-md p-2">
-                                        <div className="w-10 h-10 bg-gray-200 rounded-md flex items-center justify-center text-gray-400 text-base font-bold">IMG</div>
-                                        <div>
-                                            <div className="text-emerald-600 font-semibold text-sm">{p.title}</div>
-                                            <div className="text-gray-700 text-xs">{p.desc}</div>
-                                        </div>
-                                    </div>
-                                ))}
+                            <div className="w-full mb-4">
+                                <div className="font-semibold text-emerald-500 text-sm mb-1">Open To</div>
+                                <div className="text-gray-700 text-sm">{(modalFounder.openTo || ['Remote', 'Hybrid']).join(', ')}</div>
                             </div>
-                        </div>
-                        <div className="w-full mb-2">
-                            <div className="font-semibold text-emerald-500 text-sm mb-1">Links</div>
-                            <div className="flex gap-4">
-                                <a href={`https://github.com/${modalFounder.github || 'alexjohnson'}`} target="_blank" rel="noopener noreferrer" className="text-emerald-500 underline text-sm">GitHub</a>
-                                <a href={`https://linkedin.com/in/${modalFounder.linkedin || 'alex-johnson'}`} target="_blank" rel="noopener noreferrer" className="text-emerald-500 underline text-sm">LinkedIn</a>
+                            <div className="w-full mb-4">
+                                <div className="font-semibold text-emerald-500 text-sm mb-1">Looking For</div>
+                                <div className="text-gray-700 text-sm">{(modalFounder.lookingFor || ['Business Co-founder', 'Go-to-Market', 'Fundraising']).join(', ')}</div>
                             </div>
-                        </div>
-                        {/* Action buttons */}
-                        <div className="flex gap-4 w-full justify-center mt-8">
-                            <button className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-tr from-emerald-500 to-emerald-600 text-white rounded-xl py-2 font-semibold shadow hover:from-emerald-600 hover:to-emerald-700 transition"><Link size={18} className="text-white" /> Intro</button>
-                            <button className="flex-1 flex items-center justify-center gap-2 bg-gray-50 text-emerald-500 border border-emerald-500 rounded-xl py-2 font-semibold"><ClipboardText size={18} className="text-emerald-500" /> Proposal</button>
-                        </div>
-                        <div className="flex gap-4 w-full justify-center mt-4">
-                            <button className="flex-1 flex items-center justify-center gap-2 border border-emerald-500 text-emerald-500 rounded-xl py-2 font-semibold bg-white"><Coffee size={18} className="text-emerald-500" /> Coffee Chat</button>
-                            <button className="flex-1 flex items-center justify-center gap-2 border border-emerald-500 text-emerald-500 rounded-xl py-2 font-semibold bg-white"><Envelope size={18} className="text-emerald-500" /> Message</button>
+                            <div className="w-full mb-4">
+                                <div className="font-semibold text-emerald-500 text-sm mb-1">Mutual Connections</div>
+                                <div className="text-gray-700 text-sm">{modalFounder.mutualConnections || 3}</div>
+                            </div>
+                            <div className="w-full mb-2">
+                                <div className="font-semibold text-emerald-500 text-sm mb-1">Links</div>
+                                <div className="flex gap-4">
+                                    <a href={`https://github.com/${modalFounder.github || 'alexjohnson'}`} target="_blank" rel="noopener noreferrer" className="text-emerald-500 underline text-sm">GitHub</a>
+                                    <a href={`https://linkedin.com/in/${modalFounder.linkedin || 'alex-johnson'}`} target="_blank" rel="noopener noreferrer" className="text-emerald-500 underline text-sm">LinkedIn</a>
+                                </div>
+                            </div>
+                            {/* Action buttons */}
+                            <div className="flex gap-4 w-full justify-center mt-8">
+                                <button className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-tr from-emerald-500 to-emerald-600 text-white rounded-xl py-2 font-semibold shadow hover:from-emerald-600 hover:to-emerald-700 transition"><Link size={18} className="text-white" /> Intro</button>
+                                <button className="flex-1 flex items-center justify-center gap-2 bg-gray-50 text-emerald-500 border border-emerald-500 rounded-xl py-2 font-semibold"><ClipboardText size={18} className="text-emerald-500" /> Proposal</button>
+                            </div>
+                            <div className="flex gap-4 w-full justify-center mt-4">
+                                <button className="flex-1 flex items-center justify-center gap-2 border border-emerald-500 text-emerald-500 rounded-xl py-2 font-semibold bg-white"><Coffee size={18} className="text-emerald-500" /> Coffee Chat</button>
+                                <button className="flex-1 flex items-center justify-center gap-2 border border-emerald-500 text-emerald-500 rounded-xl py-2 font-semibold bg-white"><Envelope size={18} className="text-emerald-500" /> Message</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -452,7 +473,7 @@ function ProfileCiraCreateScreen() {
                 </div>
             </div>
             {/* Main Form - minimal, neutral, all sections restored */}
-            <form className="w-full flex-1 px-7 pt-3 pb-8 flex flex-col gap-8 overflow-y-auto relative z-0 bg-white" style={{ overflowX: 'hidden' }}>
+            <form className="w-full flex-1 px-7 pt-3 pb-20 flex flex-col gap-8 overflow-y-auto relative z-0 bg-white" style={{ overflowX: 'hidden' }}>
                 {/* 1. What You've Built */}
                 <section className="bg-white rounded-xl border border-gray-100 shadow-sm px-4 py-4 mb-2">
                     <label className="block text-xs text-gray-600 mb-1 font-semibold">GitHub/Portfolio URL <span className="text-red-500">*</span></label>
