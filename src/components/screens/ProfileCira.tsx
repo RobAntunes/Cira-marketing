@@ -95,7 +95,7 @@ function CiraDiscoveryScreen({ modalFounder, setModalFounder }: { modalFounder: 
     const founders: Founder[] = [
         {
             id: 1,
-            name: "Tim Stedford",
+            name: "Tim Stedford ",
             photo: "https://randomuser.me/api/portraits/men/34.jpg",
             verified: true,
             status: "Looking for technical cofounder",
@@ -152,14 +152,14 @@ function CiraDiscoveryScreen({ modalFounder, setModalFounder }: { modalFounder: 
             ],
             sideProjects: [
                 {
-                    url: "https://priyapatel.com/side1",
+                    url: "https://jennamontezprojects.com/side1",
                     title: "MicroFund",
                     description: "A micro-investment platform for emerging markets.",
                     techStack: ["Vue.js", "Firebase"],
                     revenue: "$2,000/mo"
                 },
                 {
-                    url: "https://priyapatel.com/side2",
+                    url: "https://jennamontezprojects.com/side2",
                     title: "DesignMentor",
                     description: "Mentorship platform for junior designers.",
                     techStack: ["React", "Node.js"],
@@ -792,7 +792,7 @@ function ProfileCiraCreateScreen() {
                     />
                 </section>
                 {/* Save/Continue Button */}
-                <button type="submit" className="sticky z-50 bottom-12 mt-4 w-full bg-emerald-500 text-white rounded-xl py-3 font-bold text-lg shadow hover:bg-emerald-600 transition">Save & Continue</button>
+                <button type="submit" className="sticky z-50 bottom-6 mt-4 w-full bg-emerald-500 text-white rounded-xl py-3 font-bold text-lg shadow hover:bg-emerald-600 transition">Save & Continue</button>
             </form>
 
         </>
@@ -814,8 +814,8 @@ const ProfileCira = () => {
             <div className="flex-1 w-full relative overflow-y-auto bg-white">
                 <ScreenComponent {...screenProps} />
             </div>
-            {/* Glassmorphism Bottom Navbar: always bottom-0 inside phone */}
-            <nav className="absolute left-0 bottom-0 w-full z-50 flex items-center justify-between px-3 py-2 bg-white/90 border-t border-gray-100 rounded-b-xl shadow-sm">
+            {/* Bottom Navbar: always bottom-0 inside phone */}
+            <nav className="absolute left-0 bottom-0 w-full z-50 flex items-center justify-between px-3 py-2 bg-white border-t border-gray-100 rounded-b-xl shadow-sm">
                 {NAV_ITEMS.map((item) => {
                     const isActive = activeTab === item.key;
                     return (

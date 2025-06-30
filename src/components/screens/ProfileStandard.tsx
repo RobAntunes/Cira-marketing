@@ -316,26 +316,8 @@ const ProfileStandard = () => {
             {/* Profile photo with carousel UI */}
             {screen === "create" && (
                 <div className="relative w-full h-52 bg-gray-100 flex items-center justify-center">
-                    <img
-                        src={person1.src}
-                        alt="Profile"
-                        className="object-cover w-full h-full"
-                    />
-                    {/* Carousel dots */}
-                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
-                        {[0, 1, 2, 3, 4].map((i) => (
-                            <span
-                                key={i}
-                                className={`w-2 h-2 rounded-full ${i === 0 ? "bg-white" : "bg-gray-300/60"}`}
-                            />
-                        ))}
-                    </div>
-                    {/* Next arrow */}
-                    <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-1 shadow">
-                        <svg width={18} height={18} fill="none" stroke="gray" strokeWidth={2} viewBox="0 0 24 24">
-                            <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    </button>
+                    <svg viewBox="-1.6 -1.6 19.20 19.20" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(0,0), scale(1)"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g color="#000000" font-weight="400" font-family="Ubuntu" letter-spacing="0" word-spacing="0" white-space="normal" fill="gray"> <path d="M8 2a2.84 2.84 0 0 0-1.12.221c-.345.141-.651.348-.906.615v.003l-.001.002c-.248.269-.44.592-.574.96-.137.367-.203.769-.203 1.2 0 .435.065.841.203 1.209.135.361.327.68.574.95l.001.002c.254.267.558.477.901.624v.003c.346.141.723.21 1.12.21.395 0 .77-.069 1.117-.21v-.002c.343-.147.644-.357.892-.625.255-.268.45-.59.586-.952.138-.368.204-.774.204-1.21h.01c0-.43-.065-.831-.203-1.198a2.771 2.771 0 0 0-.585-.963 2.5 2.5 0 0 0-.897-.618A2.835 2.835 0 0 0 7.999 2zM8.024 10.002c-2.317 0-3.561.213-4.486.91-.462.35-.767.825-.939 1.378-.172.553-.226.975-.228 1.71L8 14.002h5.629c-.001-.736-.052-1.159-.225-1.712-.172-.553-.477-1.027-.94-1.376-.923-.697-2.124-.912-4.44-.912z" overflow="visible"></path> </g> </g></svg>
+
                     {/* Add photo button */}
                     <button className="absolute right-2 bottom-2 bg-white/90 rounded-full p-1 shadow border border-gray-200">
                         <svg width={16} height={16} fill="none" stroke="gray" strokeWidth={2} viewBox="0 0 24 24">
