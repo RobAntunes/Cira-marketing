@@ -1,7 +1,10 @@
 ---
 import RejectCard from "../components/RejectCard";
 import Layout from "../layouts/Layout.astro";
+import signature from "../assets/signature.svg";
 import "../styles/global.css";
+import ProfileStandard from "../components/screens/ProfileStandard";
+import ProfileCira from "../components/screens/ProfileCira";
 
 const RejectCards = [
   {
@@ -43,6 +46,23 @@ const RejectCards = [
     className: " relative",
   },
 ];
+
+const clauses = [
+  "🎯 Merit beats credentials, always.",
+  "🚀 Your work speaks louder than your words.",
+  "💡 Great ideas come from unexpected places.",
+  "🛠️ Builders change the world, not talkers.",
+  "⚡ Execution trumps explanation.",
+  "🌟 Every founder's journey is valid.",
+  "🔥 Innovation happens when you stop following rules.",
+  "💪 Your potential matters more than your past.",
+  "🎨 Creativity beats conformity.",
+  "🌍 The future belongs to those who build it.",
+];
+
+const manifestoTitle = "The Cira Manifesto";
+const manifestoSubtitle = "What We Stand For.";
+const manifestoClosingLine = "This is our declaration of independence from BS.";
 ---
 
 <Layout>
@@ -129,12 +149,6 @@ const RejectCards = [
     >
       <div class="text-xs font-semibold">"Looking to raise!"</div>
     </div>
-
-    <!-- <div class="absolute top-[60%] left-[42%] z-20 w-60 p-3 bg-white/30 rounded-lg shadow border border-gray-100 backdrop-blur">
-      <div class="text-xs font-semibold">
-        "I want async, introvert-friendly networking"
-      </div>
-    </div> -->
     <div
       class="absolute bottom-[64%] right-[30%] z-[60] w-[500px] p-0 bg-transparent flex items-center"
     >
@@ -246,7 +260,6 @@ const RejectCards = [
     >
       <div
         class="bg-[#ffecd5] px-8 py-20 rounded-xl shadow-2xl flex flex-col gap-2 justify-center items-center hover:translate-y-[-10px] transition-all duration-300 relative top-0 left-0"
-        style="background-image: url('/src/assets/merit.svg'); background-size: cover; background-position: center;"
       >
         <h4 class="text-5xl font-['Fellix',_sans-serif] my-6">
           Merit Over Credentials
@@ -308,163 +321,256 @@ const RejectCards = [
             Rejections represent trillions in missed returns from investors who
             chase credentials over creativity. While they stick to their tired
             playbook, the next generation of unicorns is building in plain
-            sight. <span class="block my-2">Tired of explaining why your unconventional path makes you
-            the perfect founder? </span>
-            <span class="block"></span>Stop justifying your journey to people who
-            wouldn't recognize innovation if it came with a Harvard MBA. </span>
-            <span class="block mt-2 font-bold">Your weird is our wonderful.</span>
+            sight. <span class="block my-2"
+              >Tired of explaining why your unconventional path makes you the
+              perfect founder?
+            </span>
+            <span class="block"></span>Stop justifying your journey to people
+            who wouldn't recognize innovation if it came with a Harvard MBA.
+          </p>
+          <span
+            class="block mt-2 text-xl font-bold font-['Fellix',_sans-serif] self-start"
+            >Your weird is our wonderful.</span
+          >
+        </div>
+      </div>
+      <div class="flex flex-col gap-8 items-end justify-center">
+        <div
+          class="w-fit relative rounded-l-2xl p-12 bg-amber-950 text-white m-24 mr-0"
+        >
+          <div class="relative">
+            <h2
+              class="text-[48px] font-['Fellix',_sans-serif] p-6 pb-0 leading-tight"
+            >
+              The Catch-22 Compilation
+            </h2>
+            <div class="flex items-center justify-center">
+              <span
+                class="text-[72px] absolute left-0 -top-20 -rotate-16 drop-shadow-2xl"
+                >🗑️</span
+              >
+              <span
+                class="text-[72px] absolute right-0 -top-16 rotate-12 drop-shadow-2xl"
+                >🤡</span
+              >
+            </div>
+            <h4 class="text-2xl font-['Fellix',_sans-serif] p-6 pt-0">
+              It's time to start making sense.
+            </h4>
+          </div>
+          <ul
+            class="list-none list-inside text-xl font-['Fellix',_sans-serif] flex flex-col gap-4"
+          >
+            <li
+              class="p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-2"
+            >
+              <span class="block">Warm introductions only.</span>
+              <span class="block text-sm bg-amber-800 text-white rounded-lg p-4"
+                >Translation: I need you to know people you don't know.</span
+              >
+            </li>
+            <li
+              class="p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-2"
+            >
+              <span class="block"> Traction required to get traction.</span>
+              <span class="block text-sm bg-amber-800 text-white rounded-lg p-4"
+                >Translation: Build a product that people want before you have
+                the resources to build it.</span
+              >
+            </li>
+            <li
+              class="p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-2"
+            >
+              <span class="block">
+                Need a team to get funding to hire a team.</span
+              >
+              <span class="block text-sm bg-amber-800 text-white rounded-lg p-4"
+                >Translation: Be rich enough to work for free while recruiting
+                other people to also work for free.</span
+              >
+            </li>
+            <li
+              class="p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-2"
+            >
+              <span class="block">
+                Prove market fit before building product.
+              </span>
+              <span class="block text-sm bg-amber-800 text-white rounded-lg p-4"
+                >Translation: Convince people to buy something that doesn't
+                exist yet.</span
+              >
+            </li>
+            <li
+              class="p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-2"
+            >
+              <span class="block">
+                Must have paying customers to get funding.
+              </span>
+              <span class="block text-sm bg-amber-800 text-white rounded-lg p-4"
+                >Translation: Bootstrap to profitability, then we'll give you
+                money you no longer desperately need.</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="flex flex-col gap-4 absolute top-0 mt-40 left-0 bg-amber-950 p-12 pl-0 rounded-r-2xl"
+      >
+        <div class="flex flex-col gap-2 pl-6 mb-2">
+          <h2
+            class="text-[48px] font-['Fellix',_sans-serif] text-white leading-tight"
+          >
+            The Rejection Collection
+          </h2>
+          <p class="text-xl font-['Fellix',_sans-serif] text-white">
+            Greatest hits from the gatekeepers who missed the memo.
           </p>
         </div>
-        <div class="flex flex-col gap-8 items-end justify-center">
-          <div
-            class="w-fit relative  rounded-l-2xl p-12 bg-amber-950 text-white m-24 mr-0"
-          >
-            <div class="relative">
-              <h2
-                class="text-[48px] font-['Fellix',_sans-serif] p-6 pb-0 leading-tight"
-              >
-                The Catch-22 Compilation
-              </h2>
-              <div class="flex items-center justify-center">
-                <span
-                  class="text-[72px] absolute left-0 -top-20 -rotate-16 drop-shadow-2xl"
-                  >🗑️</span
-                >
-                <span
-                  class="text-[72px] absolute right-0 -top-16 rotate-12 drop-shadow-2xl"
-                  >🤡</span
-                >
-              </div>
-              <h4 class="text-2xl font-['Fellix',_sans-serif] p-6 pt-0">
-                It's time to start making sense.
-              </h4>
-            </div>
-            <ul
-              class="list-none list-inside text-xl font-['Fellix',_sans-serif] flex flex-col gap-4"
-            >
-              <li
-                class="p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-2"
-              >
-                <span class="block">Warm introductions only.</span>
-                <span
-                  class="block text-sm bg-amber-800 text-white rounded-lg p-4"
-                  >Translation: I need you to know people you don't know.</span
-                >
-              </li>
-              <li
-                class="p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-2"
-              >
-                <span class="block"> Traction required to get traction.</span>
-                <span
-                  class="block text-sm bg-amber-800 text-white rounded-lg p-4"
-                  >Translation: Build a product that people want before you have
-                  the resources to build it.</span
-                >
-              </li>
-              <li
-                class="p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-2"
-              >
-                <span class="block">
-                  Need a team to get funding to hire a team.</span
-                >
-                <span
-                  class="block text-sm bg-amber-800 text-white rounded-lg p-4"
-                  >Translation: Be rich enough to work for free while recruiting
-                  other people to also work for free.</span
-                >
-              </li>
-              <li
-                class="p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-2"
-              >
-                <span class="block">
-                  Prove market fit before building product.
-                </span>
-                <span
-                  class="block text-sm bg-amber-800 text-white rounded-lg p-4"
-                  >Translation: Convince people to buy something that doesn't
-                  exist yet.</span
-                >
-              </li>
-              <li
-                class="p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-2"
-              >
-                <span class="block">
-                  Must have paying customers to get funding.
-                </span>
-                <span
-                  class="block text-sm bg-amber-800 text-white rounded-lg p-4"
-                  >Translation: Bootstrap to profitability, then we'll give you
-                  money you no longer desperately need.</span
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div
-          class="flex flex-col gap-4 absolute top-0 mt-40 left-0 bg-amber-950 p-12 pl-0 rounded-r-2xl"
+        {RejectCards.map((card) => <RejectCard {...card} />)}
+      </div>
+    </div>
+  </section>
+  <section class="min-h-screen pb-24 bg-[#FEEDCC]">
+    <div
+      class="w-full h-full flex justify-center items-center font-['Montez',_sans-serif]"
+    >
+      <div
+        class="bg-[ghostwhite] p-24 w-[fit] h-[90%] rounded-2xl flex flex-col gap-8 shadow-2xl"
+      >
+        <h2
+          class="text-[96px] font-['Montez',_sans-serif] text-left text-[#2A2A2A] leading-tight lg:whitespace-nowrap font-bold"
         >
-          <div class="flex flex-col gap-2 pl-6 mb-2">
-            <h2
-              class="text-[48px] font-['Fellix',_sans-serif] text-white leading-tight"
-            >
-              The Rejection Collection
-            </h2>
-            <p class="text-xl font-['Fellix',_sans-serif] text-white">
-              Greatest hits from the gatekeepers who missed the memo.
-            </p>
+          {manifestoTitle}
+        </h2>
+        <h3
+          class="text-3xl font-['Montez',_sans-serif] text-left text-[#2A2A2A] leading-tight lg:whitespace-nowrap font-bold"
+        >
+          {manifestoSubtitle}
+        </h3>
+        <div class="flex flex-col gap-4">
+          {
+            clauses.map((clause) => {
+              // Regex to match the emoji at the start (handles most emoji cases)
+              const match = clause.match(
+                /^(\p{Emoji_Presentation}|\p{Extended_Pictographic}|\p{Emoji})\s?(.*)$/u
+              );
+              let emoji, text;
+              if (match) {
+                emoji = match[1];
+                text = match[2];
+              } else {
+                // fallback: no emoji found
+                emoji = "";
+                text = clause;
+              }
+              return (
+                <p class="text-3xl p-4 border-b border-gray-300 text-left">
+                  <span class="inline-flex items-center">
+                    <span
+                      class="mr-3"
+                      style="width: 2em; display: inline-block; text-align: center;"
+                    >
+                      {emoji}
+                    </span>
+                    <span>{text}</span>
+                  </span>
+                </p>
+              );
+            })
+          }
+        </div>
+        <p class="text-4xl mt-6 text-left font-['Montez',_sans-serif]">
+          {manifestoClosingLine}
+        </p>
+        <div class="flex items-center mt-8 mb-2 relative">
+          <span
+            class="text-2xl text-[#2A2A2A] font-thin mr-2 relative bottom-1 select-none font-['Fellix',_sans-serif]"
+            >X</span
+          >
+          <span class="flex-1 border-t border-gray-300"></span>
+          <div class="flex justify-end absolute -top-10 left-10">
+            <img src={signature.src} alt="Signature" class="h-12 mt-2" />
           </div>
-          {RejectCards.map((card) => <RejectCard {...card} />)}
         </div>
       </div>
     </div>
   </section>
+  <section
+    class="min-h-screen pb-32 bg-[#FEEDCC] bg-[url('/src/assets/vs.svg')] bg-contain bg-no-repeat bg-bottom"
+  >
+    <div class="flex flex-col max-w-7xl ml-40 mb-12 pt-32">
+      <h2
+        class="text-[96px] font-['Fellix',_sans-serif] text-[#2A2A2A] tracking-tight leading-tight"
+      >
+        We're shaking up the system.
+      </h2>
+      <p
+        class="w-[65%] text-2xl font-['Fellix',_sans-serif] text-left text-[#2A2A2A]"
+      >
+        This isn't just a rehash of the same old methodology. Cira is a
+        completely new way to network and connect founders, advisors, and
+        investors.
+        <span class="block mt-2 font-bold"
+          >Made by founders that get it, and want to change the game.</span
+        >
+      </p>
+    </div>
 
-  <style>
-    @keyframes bounce-slow {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-16px);
-      }
-    }
-    .animate-bounce-slow {
-      animation: bounce-slow 3s infinite;
-    }
-    @keyframes float {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-8px);
-      }
-    }
-    .animate-float {
-      animation: float 4s ease-in-out infinite;
-    }
-  </style>
+    <div
+      class="w-[60%] h-screen flex justify-center items-end mx-auto gap-[34rem]"
+    >
+      <div class="flex flex-col items-center justify-center">
+        <p
+          class="text-5xl mb-6 font-['Fellix',_sans-serif] text-center text-[#2A2A2A]"
+        >
+          Standard
+        </p>
+        <ProfileStandard client:load />
+      </div>
+
+      <div>
+        <div class="flex w-fit justify-center items-center gap-4 mx-auto">
+          <img
+            src="/src/assets/cira-logo-dark.svg"
+            alt="Cira"
+            class="h-18 mb-6"
+          />
+          <p
+            class="text-5xl font-['Fellix',_sans-serif] text-center text-black mb-6"
+          >
+            Cira
+          </p>
+        </div>
+        <ProfileCira client:load />
+      </div>
+    </div>
+  </section>
 </Layout>
 
-<!-- 
-<div class="flex flex-col gap-8 pr-24 items-end">
-  <h2
-    class="text-[96px] font-semibold font-['Fellix',_sans-serif] text-right text-[#2A2A2A]"
-  >
-    Too weird for LinkedIn? Perfect for Cira.
-  </h2>
-  <p class="text-xl font-['Fellix',_sans-serif] w-3/5 gap-2 flex flex-col">
-    Traditional investors have been playing the same game for so long,
-    they'd probably swipe left on Steve Jobs for 'lack of formal
-    business training.' But innovation happens when creativity meets
-    opportunity, not connections.<span class="block">
-      With AI transforming execution, ideas have become the real
-      currency.
-    </span>
-    <span class="block">
-      Forward-thinking investors have detected the seismic shift and are
-      learning to compete for founders, not the other way around.
-    </span>
-  </p>
-</div> -->
+<style>
+  @keyframes bounce-slow {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-16px);
+    }
+  }
+  .animate-bounce-slow {
+    animation: bounce-slow 3s infinite;
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+</style>
