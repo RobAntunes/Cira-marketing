@@ -59,6 +59,14 @@ type NavKey = "create" | "search" | "profile" | "message";
 // Add types for founder and skill verification
 
 type SkillVerification = "verified" | "peer" | "self";
+type SideProject = {
+    url: string;
+    title: string;
+    description: string;
+    techStack?: string[];
+    revenue?: string;
+};
+
 type Founder = {
     id: number;
     name: string;
@@ -71,17 +79,15 @@ type Founder = {
     location: string;
     availability: string;
     interest: number;
-    education?: string;
-    credentials?: string[];
     experience?: string;
     funding?: string;
     openTo?: string[];
     lookingFor?: string[];
     mutualConnections?: number;
     projects?: { title: string; desc: string }[];
+    sideProjects?: SideProject[];
     github?: string;
     linkedin?: string;
-    sideProjects?: string[];
 };
 
 function CiraDiscoveryScreen({ modalFounder, setModalFounder }: { modalFounder: Founder | null, setModalFounder: (f: Founder | null) => void }) {
@@ -89,8 +95,8 @@ function CiraDiscoveryScreen({ modalFounder, setModalFounder }: { modalFounder: 
     const founders: Founder[] = [
         {
             id: 1,
-            name: "Alex Kim",
-            photo: "https://randomuser.me/api/portraits/men/32.jpg",
+            name: "Tim Stedford",
+            photo: "https://randomuser.me/api/portraits/men/34.jpg",
             verified: true,
             status: "Looking for technical cofounder",
             skills: [
@@ -108,14 +114,26 @@ function CiraDiscoveryScreen({ modalFounder, setModalFounder }: { modalFounder: 
                 { title: "AI Chatbot", desc: "Conversational AI for support teams." }
             ],
             sideProjects: [
-                "https://alexkim.dev/side1",
-                "https://alexkim.dev/side2"
+                {
+                    url: "https://mysideproject.dev/side1",
+                    title: "FounderMatch",
+                    description: "A tool to match founders based on skills and values.",
+                    techStack: ["Next.js", "TypeScript", "Supabase"],
+                    revenue: "$1,200/mo"
+                },
+                {
+                    url: "https://myothersideproject.com/side2",
+                    title: "RemoteBoard",
+                    description: "A job board for remote startup jobs.",
+                    techStack: ["Astro", "TailwindCSS"],
+                    revenue: "$500/mo"
+                }
             ]
         },
         {
             id: 2,
-            name: "Priya Patel",
-            photo: "https://randomuser.me/api/portraits/women/44.jpg",
+            name: "Jenna Montez",
+            photo: "https://randomuser.me/api/portraits/women/40.jpg",
             verified: true,
             status: "Open to opportunities",
             skills: [
@@ -133,8 +151,20 @@ function CiraDiscoveryScreen({ modalFounder, setModalFounder }: { modalFounder: 
                 { title: "DesignHub", desc: "A portfolio builder for designers." }
             ],
             sideProjects: [
-                "https://priyapatel.com/side1",
-                "https://priyapatel.com/side2"
+                {
+                    url: "https://priyapatel.com/side1",
+                    title: "MicroFund",
+                    description: "A micro-investment platform for emerging markets.",
+                    techStack: ["Vue.js", "Firebase"],
+                    revenue: "$2,000/mo"
+                },
+                {
+                    url: "https://priyapatel.com/side2",
+                    title: "DesignMentor",
+                    description: "Mentorship platform for junior designers.",
+                    techStack: ["React", "Node.js"],
+                    revenue: undefined
+                }
             ]
         },
         // ...more founders
@@ -164,6 +194,8 @@ function CiraDiscoveryScreen({ modalFounder, setModalFounder }: { modalFounder: 
     const filteredFounders = founders; // TODO: filter logic
     // 6. Render
     const brandGreen = '#10B981';
+    // Move activeSkill state to top level
+    const [activeSkill, setActiveSkill] = React.useState<null | { name: string; verification: SkillVerification }>(null);
     return (
         <div className="relative w-full h-full flex flex-col">
             {/* Heading */}
@@ -279,99 +311,205 @@ function CiraDiscoveryScreen({ modalFounder, setModalFounder }: { modalFounder: 
             </div>
             {/* Modal */}
             {modalFounder && (
-                <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/40">
-                    <div className="bg-white rounded-3xl max-w-[340px] w-full shadow-2xl relative flex flex-col items-center max-h-[90vh]">
-                        <button className="absolute top-4 right-4 w-11 h-11 bg-white border border-emerald-100 rounded-full text-3xl text-emerald-500 cursor-pointer shadow z-50" onClick={() => setModalFounder(null)} aria-label="Close">&times;</button>
-                        <div className="w-full px-4 pt-16 pb-28 overflow-y-auto" style={{ maxHeight: '80vh' }}>
-                            <div className="relative mb-5 flex flex-col items-center">
-                                <div className="relative">
-                                    <img src={modalFounder.photo} alt={modalFounder.name} className="w-20 h-20 rounded-2xl border-2 border-gray-50 shadow" />
-                                    {modalFounder.verified && (
-                                        <span className="absolute -bottom-2 -right-2 w-7 h-7 bg-emerald-500 border-2 border-white rounded-full flex items-center justify-center shadow text-white">
-                                            <CheckCircle size={20} weight="fill" />
-                                        </span>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="text-xl font-semibold text-gray-900 mb-1 text-center">{modalFounder.name}</div>
-                            <div className="text-emerald-500 font-medium text-base mb-4 text-center">{modalFounder.status}</div>
-                            <div className="text-base text-gray-700 mb-3 text-center">{modalFounder.project || modalFounder.quote}</div>
-                            <div className="text-xs text-gray-500 mb-6 text-center">{modalFounder.location} &middot; {modalFounder.availability}</div>
-                            <div className="flex flex-wrap gap-2 mb-6 justify-center">
-                                {modalFounder.skills.map(s => (
-                                    <span key={s.name} className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-medium border border-emerald-200 bg-emerald-50 text-emerald-600 gap-1">
-                                        {skillIcon(s.verification, 'emerald-500')} {s.name}
-                                    </span>
-                                ))}
-                            </div>
-                            {/* Live Project Demos section */}
-                            {modalFounder.projects && modalFounder.projects.length > 0 && (
-                                <div className="w-full mb-4">
-                                    <div className="font-semibold text-emerald-500 text-sm mb-1">Live Project Demos</div>
-                                    <div className="flex flex-col gap-2">
-                                        {modalFounder.projects.map((p, i) => (
-                                            <div key={p.title} className="flex items-center gap-3 bg-gray-50 rounded-md p-2">
-                                                <div className="w-10 h-10 bg-gray-200 rounded-md flex items-center justify-center text-gray-400 text-base font-bold">IMG</div>
-                                                <div>
-                                                    <div className="text-emerald-600 font-semibold text-sm">{p.title}</div>
-                                                    <div className="text-gray-700 text-xs">{p.desc}</div>
-                                                </div>
+                (() => {
+                    // Skill verification info
+                    const verificationInfo = {
+                        verified: {
+                            label: 'Verified',
+                            icon: <CheckCircle size={20} className="text-emerald-500" />,
+                            desc: 'This skill has been verified by a trusted third party or platform.'
+                        },
+                        peer: {
+                            label: 'Peer',
+                            icon: <ArrowsCounterClockwise size={20} className="text-blue-500" />,
+                            desc: 'This skill has been endorsed by a peer or collaborator.'
+                        },
+                        self: {
+                            label: 'Self',
+                            icon: <PencilSimple size={20} className="text-gray-400" />,
+                            desc: 'This skill is self-reported by the founder.'
+                        }
+                    };
+                    // Mock in-depth skill info
+                    const skillDetails: {
+                        [key: string]: {
+                            where: string;
+                            years: string;
+                            rating: string;
+                            dontKnow: string;
+                        } | undefined;
+                    } = {
+                        'React': {
+                            where: 'Built multiple SaaS dashboards and landing pages',
+                            years: '3 years',
+                            rating: 'Advanced',
+                            dontKnow: 'React Native, Suspense for Data Fetching'
+                        },
+                        'Product': {
+                            where: 'Led product at 2 startups',
+                            years: '4 years',
+                            rating: 'Expert',
+                            dontKnow: 'Product analytics at scale'
+                        },
+                        'AI': {
+                            where: 'Built GPT-powered chatbots',
+                            years: '1 year',
+                            rating: 'Intermediate',
+                            dontKnow: 'Reinforcement learning'
+                        },
+                        'Go': {
+                            where: 'Backend for FinTech app',
+                            years: '2 years',
+                            rating: 'Intermediate',
+                            dontKnow: 'Go generics'
+                        },
+                        'FinTech': {
+                            where: 'Co-founded a FinTech startup',
+                            years: '2 years',
+                            rating: 'Advanced',
+                            dontKnow: 'Regulatory compliance in EU'
+                        },
+                        'Design': {
+                            where: 'Designed mobile and web apps',
+                            years: '5 years',
+                            rating: 'Expert',
+                            dontKnow: '3D/animation design'
+                        }
+                    };
+                    return (
+                        <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/40">
+                            <div className="bg-white rounded-3xl max-w-[340px] w-full shadow-2xl relative flex flex-col items-center max-h-[90vh]">
+                                <button className="absolute top-4 right-4 w-11 h-11 bg-white border border-emerald-100 rounded-full text-3xl text-emerald-500 cursor-pointer shadow z-50" onClick={() => setModalFounder(null)} aria-label="Close">&times;</button>
+                                <div className="w-full px-4 pt-16 pb-28 overflow-y-auto" style={{ maxHeight: '80vh' }}>
+                                    <div className="relative mb-5 flex flex-col items-center">
+                                        <div className="relative">
+                                            <img src={modalFounder.photo} alt={modalFounder.name} className="w-20 h-20 rounded-2xl border-2 border-gray-50 shadow" />
+                                            {modalFounder.verified && (
+                                                <span className="absolute -bottom-2 -right-2 w-7 h-7 bg-emerald-500 border-2 border-white rounded-full flex items-center justify-center shadow text-white">
+                                                    <CheckCircle size={20} weight="fill" />
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="text-xl font-semibold text-gray-900 mb-1 text-center">{modalFounder.name}</div>
+                                    <div className="text-emerald-500 font-medium text-base mb-4 text-center">{modalFounder.status}</div>
+                                    <div className="text-base text-gray-700 mb-3 text-center">{modalFounder.project || modalFounder.quote}</div>
+                                    <div className="text-xs text-gray-500 mb-6 text-center">{modalFounder.location} &middot; {modalFounder.availability}</div>
+                                    <div className="flex flex-wrap gap-2 mb-6 justify-center">
+                                        {modalFounder.skills.map(s => (
+                                            <button
+                                                key={s.name}
+                                                type="button"
+                                                className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-medium border border-emerald-200 bg-emerald-50 text-emerald-600 gap-1 focus:outline-none focus:ring-2 focus:ring-emerald-300 hover:cursor-pointer hover:bg-emerald-100"
+                                                onClick={() => setActiveSkill(s)}
+                                            >
+                                                {skillIcon(s.verification, 'emerald-500')} {s.name}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    {/* Live Project Demos section */}
+                                    {modalFounder.projects && modalFounder.projects.length > 0 && (
+                                        <div className="w-full mb-4">
+                                            <div className="font-semibold text-emerald-500 text-sm mb-1">Live Project Demos</div>
+                                            <div className="flex flex-col gap-2">
+                                                {modalFounder.projects.map((p, i) => (
+                                                    <div key={p.title} className="flex items-center gap-3 bg-gray-50 rounded-md p-2">
+                                                        <div className="w-10 h-10 bg-gray-200 rounded-md flex items-center justify-center text-gray-400 text-base font-bold">IMG</div>
+                                                        <div>
+                                                            <div className="text-emerald-600 font-semibold text-sm">{p.title}</div>
+                                                            <div className="text-gray-700 text-xs">{p.desc}</div>
+                                                        </div>
+                                                    </div>
+                                                ))}
                                             </div>
-                                        ))}
+                                        </div>
+                                    )}
+                                    {/* Side Projects section */}
+                                    {modalFounder.sideProjects && modalFounder.sideProjects.length > 0 && (
+                                        <div className="w-full mb-4">
+                                            <div className="font-semibold text-emerald-500 text-sm mb-1">Side Projects</div>
+                                            <div className="flex flex-col gap-4">
+                                                {modalFounder.sideProjects.map((sp, i) => (
+                                                    <div key={sp.url} className="rounded-xl border border-gray-100 bg-gray-50 p-4 flex flex-col gap-1 shadow-sm">
+                                                        <div className="flex items-center gap-2 mb-1">
+                                                            <a href={sp.url} target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-700 hover:underline text-base">{sp.title}</a>
+                                                            {sp.revenue && <span className="ml-2 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold">{sp.revenue}</span>}
+                                                        </div>
+                                                        <div className="text-gray-700 text-sm mb-1">{sp.description}</div>
+                                                        {sp.techStack && sp.techStack.length > 0 && (
+                                                            <div className="flex flex-wrap gap-2 mt-1">
+                                                                {sp.techStack.map((tech) => (
+                                                                    <span key={tech} className="px-2 py-0.5 rounded-full bg-emerald-200 text-emerald-900 text-xs font-medium">{tech}</span>
+                                                                ))}
+                                                            </div>
+                                                        )}
+                                                        <a href={sp.url} target="_blank" rel="noopener noreferrer" className="text-emerald-500 underline text-xs mt-1 break-all">{sp.url}</a>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {/* Experience, Funding, Open To, Looking For, Mutual Connections, Links, Action Buttons remain unchanged */}
+                                    <div className="w-full mb-4">
+                                        <div className="font-semibold text-emerald-500 text-sm mb-1">Experience</div>
+                                        <div className="text-gray-700 text-sm">{modalFounder.experience || '7 years'}</div>
+                                    </div>
+                                    <div className="w-full mb-4">
+                                        <div className="font-semibold text-emerald-500 text-sm mb-1">Funding</div>
+                                        <div className="text-gray-700 text-sm">{modalFounder.funding || '$250k pre-seed raised'}</div>
+                                    </div>
+                                    <div className="w-full mb-4">
+                                        <div className="font-semibold text-emerald-500 text-sm mb-1">Open To</div>
+                                        <div className="text-gray-700 text-sm">{(modalFounder.openTo || ['Remote', 'Hybrid']).join(', ')}</div>
+                                    </div>
+                                    <div className="w-full mb-4">
+                                        <div className="font-semibold text-emerald-500 text-sm mb-1">Looking For</div>
+                                        <div className="text-gray-700 text-sm">{(modalFounder.lookingFor || ['Business Co-founder', 'Go-to-Market', 'Fundraising']).join(', ')}</div>
+                                    </div>
+                                    <div className="w-full mb-4">
+                                        <div className="font-semibold text-emerald-500 text-sm mb-1">Mutual Connections</div>
+                                        <div className="text-gray-700 text-sm">{modalFounder.mutualConnections || 3}</div>
+                                    </div>
+                                    <div className="w-full mb-2">
+                                        <div className="font-semibold text-emerald-500 text-sm mb-1">Links</div>
+                                        <div className="flex gap-4">
+                                            <a href={`https://github.com/${modalFounder.github || 'alexjohnson'}`} target="_blank" rel="noopener noreferrer" className="text-emerald-500 underline text-sm">GitHub</a>
+                                            <a href={`https://linkedin.com/in/${modalFounder.linkedin || 'alex-johnson'}`} target="_blank" rel="noopener noreferrer" className="text-emerald-500 underline text-sm">LinkedIn</a>
+                                        </div>
+                                    </div>
+                                    {/* Action buttons */}
+                                    <div className="flex gap-4 w-full justify-center mt-8">
+                                        <button className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-tr from-emerald-500 to-emerald-600 text-white rounded-xl py-2 font-semibold shadow hover:from-emerald-600 hover:to-emerald-700 transition"><Link size={18} className="text-white" /> Intro</button>
+                                        <button className="flex-1 flex items-center justify-center gap-2 bg-gray-50 text-emerald-500 border border-emerald-500 rounded-xl py-2 font-semibold"><ClipboardText size={18} className="text-emerald-500" /> Proposal</button>
+                                    </div>
+                                    <div className="flex gap-4 w-full justify-center mt-4">
+                                        <button className="flex-1 flex items-center justify-center gap-2 border border-emerald-500 text-emerald-500 rounded-xl py-2 font-semibold bg-white"><Coffee size={18} className="text-emerald-500" /> Coffee Chat</button>
+                                        <button className="flex-1 flex items-center justify-center gap-2 border border-emerald-500 text-emerald-500 rounded-xl py-2 font-semibold bg-white"><Envelope size={18} className="text-emerald-500" /> Message</button>
                                     </div>
                                 </div>
-                            )}
-                            {/* Side Projects section */}
-                            {modalFounder.sideProjects && modalFounder.sideProjects.length > 0 && (
-                                <div className="w-full mb-4">
-                                    <div className="font-semibold text-emerald-500 text-sm mb-1">Side Projects</div>
-                                    <div className="flex flex-col gap-2">
-                                        {modalFounder.sideProjects.map((link, i) => (
-                                            <a key={link} href={link} target="_blank" rel="noopener noreferrer" className="text-emerald-600 underline text-sm break-all">{link}</a>
-                                        ))}
+                                {/* Skill details modal-inside-modal */}
+                                {activeSkill && (
+                                    <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40">
+                                        <div className="bg-white rounded-2xl p-6 max-w-[300px] w-full shadow-xl relative flex flex-col items-center">
+                                            <button className="absolute top-2 right-2 w-8 h-8 bg-white border border-emerald-100 rounded-full text-2xl text-emerald-500 cursor-pointer shadow z-50" onClick={() => setActiveSkill(null)} aria-label="Close">&times;</button>
+                                            <div className="flex items-center gap-2 mb-2">
+                                                {verificationInfo[activeSkill.verification].icon}
+                                                <span className="font-bold text-lg text-gray-900">{activeSkill.name}</span>
+                                            </div>
+                                            <div className="text-xs text-gray-500 mb-2">{verificationInfo[activeSkill.verification].label} Skill</div>
+                                            <div className="text-sm text-gray-700 mb-4 text-center">{verificationInfo[activeSkill.verification].desc}</div>
+                                            <div className="w-full text-left text-xs text-gray-700 mb-1 font-semibold">About this skill</div>
+                                            <div className="w-full text-left text-xs text-gray-600 mb-1"><span className="font-semibold">Where used:</span> {skillDetails[activeSkill.name]?.where || 'N/A'}</div>
+                                            <div className="w-full text-left text-xs text-gray-600 mb-1"><span className="font-semibold">How long:</span> {skillDetails[activeSkill.name]?.years || 'N/A'}</div>
+                                            <div className="w-full text-left text-xs text-gray-600 mb-1"><span className="font-semibold">Self-rating:</span> {skillDetails[activeSkill.name]?.rating || 'N/A'}</div>
+                                            <div className="w-full text-left text-xs text-gray-600 mb-1"><span className="font-semibold">Things I don't know yet:</span> {skillDetails[activeSkill.name]?.dontKnow || 'N/A'}</div>
+                                        </div>
                                     </div>
-                                </div>
-                            )}
-                            {/* Experience, Funding, Open To, Looking For, Mutual Connections, Links, Action Buttons remain unchanged */}
-                            <div className="w-full mb-4">
-                                <div className="font-semibold text-emerald-500 text-sm mb-1">Experience</div>
-                                <div className="text-gray-700 text-sm">{modalFounder.experience || '7 years'}</div>
-                            </div>
-                            <div className="w-full mb-4">
-                                <div className="font-semibold text-emerald-500 text-sm mb-1">Funding</div>
-                                <div className="text-gray-700 text-sm">{modalFounder.funding || '$250k pre-seed raised'}</div>
-                            </div>
-                            <div className="w-full mb-4">
-                                <div className="font-semibold text-emerald-500 text-sm mb-1">Open To</div>
-                                <div className="text-gray-700 text-sm">{(modalFounder.openTo || ['Remote', 'Hybrid']).join(', ')}</div>
-                            </div>
-                            <div className="w-full mb-4">
-                                <div className="font-semibold text-emerald-500 text-sm mb-1">Looking For</div>
-                                <div className="text-gray-700 text-sm">{(modalFounder.lookingFor || ['Business Co-founder', 'Go-to-Market', 'Fundraising']).join(', ')}</div>
-                            </div>
-                            <div className="w-full mb-4">
-                                <div className="font-semibold text-emerald-500 text-sm mb-1">Mutual Connections</div>
-                                <div className="text-gray-700 text-sm">{modalFounder.mutualConnections || 3}</div>
-                            </div>
-                            <div className="w-full mb-2">
-                                <div className="font-semibold text-emerald-500 text-sm mb-1">Links</div>
-                                <div className="flex gap-4">
-                                    <a href={`https://github.com/${modalFounder.github || 'alexjohnson'}`} target="_blank" rel="noopener noreferrer" className="text-emerald-500 underline text-sm">GitHub</a>
-                                    <a href={`https://linkedin.com/in/${modalFounder.linkedin || 'alex-johnson'}`} target="_blank" rel="noopener noreferrer" className="text-emerald-500 underline text-sm">LinkedIn</a>
-                                </div>
-                            </div>
-                            {/* Action buttons */}
-                            <div className="flex gap-4 w-full justify-center mt-8">
-                                <button className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-tr from-emerald-500 to-emerald-600 text-white rounded-xl py-2 font-semibold shadow hover:from-emerald-600 hover:to-emerald-700 transition"><Link size={18} className="text-white" /> Intro</button>
-                                <button className="flex-1 flex items-center justify-center gap-2 bg-gray-50 text-emerald-500 border border-emerald-500 rounded-xl py-2 font-semibold"><ClipboardText size={18} className="text-emerald-500" /> Proposal</button>
-                            </div>
-                            <div className="flex gap-4 w-full justify-center mt-4">
-                                <button className="flex-1 flex items-center justify-center gap-2 border border-emerald-500 text-emerald-500 rounded-xl py-2 font-semibold bg-white"><Coffee size={18} className="text-emerald-500" /> Coffee Chat</button>
-                                <button className="flex-1 flex items-center justify-center gap-2 border border-emerald-500 text-emerald-500 rounded-xl py-2 font-semibold bg-white"><Envelope size={18} className="text-emerald-500" /> Message</button>
+                                )}
                             </div>
                         </div>
-                    </div>
-                </div>
+                    );
+                })()
             )}
         </div>
     );
@@ -399,7 +537,7 @@ const SCREEN_COMPONENTS: Record<NavKey, React.FC<any>> = {
 function ProfileCiraCreateScreen() {
     // Restore all original state for detailed sections
     const [projects, setProjects] = useState([{ title: '', url: '', description: '' }]);
-    const [sideProjects, setSideProjects] = useState(['']);
+    const [sideProjects, setSideProjects] = useState<SideProject[]>([]);
     const [projectPhotos, setProjectPhotos] = useState<File[]>([]);
     const [skills, setSkills] = useState<{ name: string; verification: SkillVerification }[]>([]);
     const [endorsements, setEndorsements] = useState<string[]>([]);
@@ -494,10 +632,17 @@ function ProfileCiraCreateScreen() {
                     <div className="mb-2">
                         <div className="flex items-center justify-between mb-1">
                             <span className="text-xs font-semibold text-gray-600">Side Projects</span>
-                            <button type="button" className="text-xs text-emerald-600 font-bold hover:underline transition" onClick={() => setSideProjects([...sideProjects, ''])}>+ Add</button>
+                            <button type="button" className="text-xs text-emerald-600 font-bold hover:underline transition" onClick={() => setSideProjects([...sideProjects, { title: '', url: '', description: '', techStack: [], revenue: '' }])}>+ Add</button>
                         </div>
                         {sideProjects.map((sp, i) => (
-                            <input key={i} type="url" placeholder="Project Link" className="border border-gray-200 rounded px-2 py-1 text-xs mb-1 w-full" />
+                            <div key={i} className="flex flex-col gap-1 mb-2 bg-gray-50 rounded-lg p-3 border border-gray-100 relative shadow-sm">
+                                <button type="button" className="absolute top-2 right-2 text-xs text-gray-400 hover:text-red-500" onClick={() => setSideProjects(sideProjects.filter((_, idx) => idx !== i))}>✕</button>
+                                <input type="text" placeholder="Project Title" className="border border-gray-200 rounded px-2 py-1 text-xs mb-1" value={sp.title} onChange={e => setSideProjects(sideProjects.map((p, idx) => idx === i ? { ...p, title: e.target.value } : p))} />
+                                <input type="url" placeholder="Project Link" className="border border-gray-200 rounded px-2 py-1 text-xs mb-1" value={sp.url} onChange={e => setSideProjects(sideProjects.map((p, idx) => idx === i ? { ...p, url: e.target.value } : p))} />
+                                <textarea placeholder="Description" rows={2} className="border border-gray-200 rounded px-2 py-1 text-xs resize-none mb-1" value={sp.description} onChange={e => setSideProjects(sideProjects.map((p, idx) => idx === i ? { ...p, description: e.target.value } : p))} />
+                                <input type="text" placeholder="Tech Stack (comma separated)" className="border border-gray-200 rounded px-2 py-1 text-xs mb-1" value={sp.techStack?.join(', ') || ''} onChange={e => setSideProjects(sideProjects.map((p, idx) => idx === i ? { ...p, techStack: e.target.value.split(',').map(s => s.trim()).filter(Boolean) } : p))} />
+                                <input type="text" placeholder="Revenue (optional)" className="border border-gray-200 rounded px-2 py-1 text-xs" value={sp.revenue || ''} onChange={e => setSideProjects(sideProjects.map((p, idx) => idx === i ? { ...p, revenue: e.target.value } : p))} />
+                            </div>
                         ))}
                     </div>
                     <div className="mb-2">
