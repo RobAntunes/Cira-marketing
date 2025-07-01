@@ -13,10 +13,9 @@ const icons = {
             <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
         </svg>
     ),
-    profile: (
+    liked: (
         <svg width={22} height={22} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-            <circle cx="12" cy="8" r="4" />
-            <path d="M4 20c0-4 8-4 8-4s8 0 8 4" />
+            <path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
         </svg>
     ),
     message: (
@@ -290,16 +289,16 @@ function CreateProfileScreen() {
 const NAV_ITEMS = [
     { key: "create", label: "Create", icon: icons.create },
     { key: "search", label: "Discover", icon: icons.search },
-    { key: "profile", label: "Profile", icon: icons.profile },
+    { key: "liked", label: "Liked", icon: icons.liked },
     { key: "message", label: "Messages", icon: icons.message },
 ];
 
-type ScreenKey = "create" | "search" | "profile" | "message";
+type ScreenKey = "create" | "search" | "liked" | "message";
 
 const SCREEN_COMPONENTS: Record<ScreenKey, React.FC> = {
     create: CreateProfileScreen,
     search: DiscoveryScreen,
-    profile: ProfileViewScreen,
+    liked: LikedFoundersScreen,
     message: MessagingScreen,
 };
 
@@ -352,5 +351,49 @@ const ProfileStandard = () => {
         </div>
     );
 };
+
+// Simple, generic liked founders screen for left tab
+function LikedFoundersScreen() {
+    const liked = [
+        {
+            name: "John Anderson",
+            role: "Technical Co-founder",
+            location: "San Francisco, CA",
+            bio: "Full-stack engineer, ex-Google. Built 3 SaaS products.",
+            photo: "https://randomuser.me/api/portraits/men/33.jpg",
+        },
+        {
+            name: "Amy Lee",
+            role: "Product Manager",
+            location: "New York, NY",
+            bio: "Product at fintech unicorn. Loves clean UX and data.",
+            photo: "https://randomuser.me/api/portraits/women/44.jpg",
+        },
+        {
+            name: "Alex Weiss",
+            role: "AI Researcher",
+            location: "Remote",
+            bio: "PhD in ML. Building next-gen LLM tools.",
+            photo: "https://randomuser.me/api/portraits/men/45.jpg",
+        },
+    ];
+    return (
+        <div className="w-full h-full flex flex-col items-center bg-gray-50 py-6 px-2 overflow-y-auto">
+            <h2 className="text-lg font-bold text-gray-700 mb-4">Liked Founders</h2>
+            <div className="flex flex-col gap-4 w-full max-w-xs">
+                {liked.map((f, i) => (
+                    <div key={i} className="w-full bg-white border border-gray-200 rounded-xl p-4 flex gap-3 items-center shadow-sm">
+                        <img src={f.photo} alt={f.name} className="w-12 h-12 rounded-full object-cover border border-gray-100" />
+                        <div className="flex-1 min-w-0">
+                            <div className="font-semibold text-gray-800 text-base truncate">{f.name}</div>
+                            <div className="text-xs text-gray-500 mb-0.5">{f.role} • {f.location}</div>
+                            <div className="text-xs text-gray-500 line-clamp-2">{f.bio}</div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
 
 export default ProfileStandard;

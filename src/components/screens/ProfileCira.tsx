@@ -34,10 +34,9 @@ const navIcons = {
             <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
         </svg>
     ),
-    profile: (
-        <svg width={24} height={24} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-            <circle cx="12" cy="8" r="4" />
-            <path d="M4 20c0-4 8-4 8-4s8 0 8 4" />
+    challenges: (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 0 1-.982-3.172M9.497 14.25a7.454 7.454 0 0 0 .981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 0 0 7.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 0 0 2.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 0 1 2.916.52 6.003 6.003 0 0 1-5.395 4.972m0 0a6.726 6.726 0 0 1-2.749 1.35m0 0a6.772 6.772 0 0 1-3.044 0" />
         </svg>
     ),
     message: (
@@ -50,11 +49,11 @@ const navIcons = {
 const NAV_ITEMS = [
     { key: "create", label: "Create", icon: navIcons.create },
     { key: "search", label: "Discover", icon: navIcons.search },
-    { key: "profile", label: "Profile", icon: navIcons.profile },
+    { key: "challenges", label: "Challenges", icon: navIcons.challenges },
     { key: "message", label: "Messages", icon: navIcons.message },
 ];
 
-type NavKey = "create" | "search" | "profile" | "message";
+type NavKey = "create" | "search" | "challenges" | "message";
 
 // Add types for founder and skill verification
 
@@ -515,10 +514,6 @@ function CiraDiscoveryScreen({ modalFounder, setModalFounder }: { modalFounder: 
     );
 }
 
-function ProfileViewScreen() {
-    return <div className="flex flex-col items-center justify-center h-full text-gray-500">Profile View Coming Soon</div>;
-}
-
 function MessagingScreen() {
     return <div className="flex flex-col items-center justify-center h-full text-gray-500">Messages Coming Soon</div>;
 }
@@ -530,7 +525,7 @@ const CiraDiscoveryScreenWrapper: React.FC<{ modalFounder: Founder | null, setMo
 const SCREEN_COMPONENTS: Record<NavKey, React.FC<any>> = {
     create: ProfileCiraCreateScreen,
     search: CiraDiscoveryScreenWrapper,
-    profile: ProfileViewScreen,
+    challenges: ChallengesScreen,
     message: MessagingScreen,
 };
 
@@ -602,7 +597,7 @@ function ProfileCiraCreateScreen() {
                 <div className="absolute left-0 bottom-0 w-full h-1 bg-gradient-to-r from-emerald-200/0 via-emerald-200 to-emerald-200/0 opacity-70" />
             </div>
             {/* Completeness Indicator */}
-            <div className="w-full px-8 pt-2 pb-2">
+            <div className="w-full px-8 pt-5 pb-2">
                 <div className="flex items-center gap-2">
                     <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
                         <div className="h-2 bg-gradient-to-r from-emerald-400 to-emerald-400 rounded-full transition-all" style={{ width: `${completeness}%` }} />
@@ -796,6 +791,68 @@ function ProfileCiraCreateScreen() {
             </form>
 
         </>
+    );
+}
+
+// Community Challenges screen for Cira
+function ChallengesScreen() {
+    const challenges = [
+        {
+            title: "Build a Real-Time Chat App",
+            description: "Prove your React and WebSocket skills by building a live chat app.",
+            skills: ["React", "WebSockets"],
+            host: { name: "Alex Weiss", photo: "https://randomuser.me/api/portraits/men/45.jpg" },
+        },
+        {
+            title: "FinTech Data Dashboard",
+            description: "Create a dashboard for financial data visualization.",
+            skills: ["Go", "FinTech", "DataViz"],
+            host: { name: "Amy Lee", photo: "https://randomuser.me/api/portraits/women/44.jpg" },
+        },
+        {
+            title: "AI-Powered Portfolio Analyzer",
+            description: "Build a tool to analyze founder portfolios using AI.",
+            skills: ["AI", "Product"],
+            host: { name: "Tim Stedford", photo: "https://randomuser.me/api/portraits/men/34.jpg" },
+        },
+        {
+            title: "Design a Mobile-First Landing Page",
+            description: "Show your design chops with a beautiful, responsive landing page.",
+            skills: ["Design", "Mobile"],
+            host: { name: "Jenna Montez", photo: "https://randomuser.me/api/portraits/women/40.jpg" },
+        },
+    ];
+    return (
+        <div>
+            <div className="w-full px-8 pt-8 pb-3 mb-4 bg-white/90 border-b border-none shadow-md z-10 relative">
+                <div className="flex justify-center mb-4 items-center gap-3">
+                    <img src="/src/assets/cira-logo-dark.svg" alt="Cira" className="h-7 drop-shadow-lg animate-float" />
+                    <span className="font-extrabold text-2xl tracking-tight text-[#2A2A2A] drop-shadow-sm">Cira</span>
+                </div>
+                <h1 className="text-3xl font-black text-[#2A2A2A] leading-tight mb-1">Challenges</h1>
+                <div className="absolute left-0 bottom-0 w-full h-1 opacity-70" />
+            </div>
+            <div className="flex flex-col gap-5 px-4 w-full max-w-xs pb-24">
+                {challenges.map((c, i) => (
+                    <div key={i} className="w-full bg-white rounded-xl p-4 flex flex-col gap-2 shadow-md">
+                        <div className="flex items-center gap-3 mb-1">
+                            <img src={c.host.photo} alt={c.host.name} className="w-9 h-9 rounded-full object-cover border border-emerald-200" />
+                            <div className="flex-1 min-w-0">
+                                <div className="font-semibold text-emerald-800 text-base truncate">{c.title}</div>
+                                <div className="text-xs text-emerald-500">Host: {c.host.name}</div>
+                            </div>
+                        </div>
+                        <div className="text-xs text-gray-700 mb-1">{c.description}</div>
+                        <div className="flex flex-wrap gap-2 mb-2">
+                            {c.skills.map(skill => (
+                                <span key={skill} className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-medium">{skill}</span>
+                            ))}
+                        </div>
+                        <button className="mt-1 w-full bg-emerald-500 text-white rounded-lg py-2 font-semibold shadow hover:from-emerald-600 hover:to-blue-500 transition">View / Join</button>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 }
 
