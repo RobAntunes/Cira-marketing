@@ -77,7 +77,7 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
 
     <!-- Floating Founder Card - Only on larger screens -->
     <div
-      class="hidden xl:block absolute bottom-[2%] right-[5%] z-30 w-64 p-4 bg-white/80 rounded-xl shadow-lg border border-gray-200 backdrop-blur-sm"
+      class="hidden lg:block absolute bottom-[2%] right-[5%] z-30 w-64 p-4 bg-white/80 rounded-xl shadow-lg border border-gray-200 backdrop-blur-sm"
     >
       <div class="flex items-center gap-3">
         <img
@@ -104,7 +104,7 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
     </div>
     <!-- Challenge Card - Only on XL screens -->
     <div
-      class="hidden xl:flex absolute right-28 bottom-24 z-20 w-96 max-w-xs p-6 bg-white/90 rounded-2xl shadow-xl border border-gray-200 backdrop-blur-sm flex-col gap-2"
+      class="hidden lg:flex absolute right-28 bottom-24 z-20 w-96 max-w-xs p-6 bg-white/90 rounded-2xl shadow-xl border border-gray-200 backdrop-blur-sm flex-col gap-2"
     >
       <div class="font-bold text-lg text-[#FBBF24]">
         🚀 Build a Mobile MVP, Fast!
@@ -141,13 +141,13 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
 
     <!-- Keep one conversation bubble on large screens -->
     <div
-      class="hidden xl:block absolute bottom-32 left-[10%] z-20 w-44 p-3 bg-white/70 rounded-lg shadow border border-gray-100 backdrop-blur-sm"
+      class="hidden lg:block absolute bottom-32 left-[10%] z-20 w-44 p-3 bg-white/70 rounded-lg shadow border border-gray-100 backdrop-blur-sm"
     >
       <div class="text-xs font-semibold">"I've got this idea…"</div>
     </div>
     <!-- Search Bar - Show on large+ screens only -->
     <div
-      class="hidden lg:flex absolute top-[32%] right-[20%] xl:right-[30%] 2xl:right-[30%] z-20 w-[45%] xl:w-[40%] 2xl:w-[35%] max-w-lg p-0 bg-transparent items-center"
+      class="hidden lg:flex absolute top-[32%] right-[20%] lg:right-[30%] lg:top-[26%] xl:right-[30%] xl:top-[33%] z-20 w-[35%] xl:w-[35%] max-w-lg p-0 bg-transparent items-center"
     >
       <span class="inline-flex items-center justify-center w-8 h-8 ml-2">
         <svg
@@ -177,7 +177,7 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
 
     <!-- Main Hero Content -->
     <div
-      class="flex flex-col items-start max-w-full lg:max-w-3xl xl:max-w-4xl text-left z-10 relative mt-8 sm:mt-12 md:mt-16 lg:mt-0"
+      class="flex flex-col items-start max-w-full lg:max-w-3xl xl:max-w-4xl text-left z-10 relative mt-24 sm:mt-12 md:mt-16 lg:mt-0"
     >
       <h1
         class="text-[40px] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[96px] font-regular tracking-tight font-['Fellix',_sans-serif] leading-[0.9] text-[#2A2A2A]"
@@ -185,21 +185,21 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
         Some Assembly Required
       </h1>
       <p
-        class="text-base sm:text-lg md:text-xl lg:text-2xl max-w-full sm:max-w-xl lg:max-w-2xl font-['Fellix',_sans-serif] pt-4 sm:pt-5 md:pt-6 text-[#2A2A2A]/80 leading-relaxed"
+        class="text-base sm:text-lg md:text-xl lg:text-2xl max-w-lg lg:max-w-2xl font-['Fellix',_sans-serif] pt-4 sm:pt-5 md:pt-6 text-[#2A2A2A]/80 leading-relaxed"
       >
         Stop networking. Start building. The first founder platform designed for
         doing, not just talking. Find your missing pieces and create something
         extraordinary.
       </p>
       <div
-        class="flex flex-col sm:flex-row gap-3 font-['Fellix',_sans-serif] pt-6 sm:pt-8"
+        class="flex gap-3 font-['Fellix',_sans-serif] pt-6 sm:pt-8 w-[100%] xs:w-[50%] max-w-[400px]"
       >
         <button
-          class="bg-[#FBBF24] text-white text-base font-medium px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 transition-all hover:shadow-lg w-full sm:w-auto"
+          class="bg-[#FBBF24] text-white text-base font-medium px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 transition-all hover:shadow-lg w-[100%]"
           >Get Started</button
         >
         <button
-          class="bg-white text-[#2A2A2A] text-base font-medium px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 hover:text-white transition-all hover:shadow-lg w-full sm:w-auto"
+          class="bg-white text-[#2A2A2A] text-base font-medium px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 hover:text-white transition-all hover:shadow-lg w-[100%]"
           >Learn More</button
         >
       </div>
@@ -259,29 +259,23 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
       </div>
     </div>
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-col gap-4 md:gap-6 lg:gap-8 mt-8 px-4 md:px-8 lg:px-12 text-[#2A2A2A]"
+      class="grid grid-cols-1 md:flex md:flex-col md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 mt-8 px-4 md:px-8 lg:px-12 text-[#2A2A2A]"
     >
-      <div>
-        <div class="flex flex-col gap-4 justify-center items-center">
-          <h2
-            class="text-4xl md:text-5xl lg:text-6xl xl:text-[80px] 2xl:text-[96px] font-['Fellix',_sans-serif] text-[#2A2A2A] leading-tight"
-          >
-            What's different about Cira?
-          </h2>
-        </div>
-      </div>
-      <div class="flex flex-col lg:flex-row gap-4">
+      <h2
+        class="text-center mt-24 mb-12 text:6xl md:text-5xl lg:text-6xl xl:text-[80px] 2xl:text-[96px] font-['Fellix',_sans-serif] text-[#2A2A2A] leading-tight"
+      >
+        What's different about Cira?
+      </h2>
+      <div class="flex flex-col xl:flex-row gap-4 md:gap-6 lg:gap-8">
         <div
           class="flex-1 bg-[#ffecd5] px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16 xl:py-20 rounded-xl shadow-2xl flex flex-col gap-2 justify-center items-center hover:translate-y-[-10px] transition-all duration-300"
         >
           <h4
-            class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-['Fellix',_sans-serif] mt-3 md:mt-4 lg:mt-6 text-left"
+            class="font-['Fellix',_sans-serif] mt-3 md:mt-4 lg:mt-6 text-left text-2xl sm:text-4xl"
           >
             Complete Freedom
           </h4>
-          <div
-            class="font-['Fellix',_sans-serif] text-base md:text-lg lg:text-xl text-left"
-          >
+          <div class="font-['Fellix',_sans-serif] text-left">
             <ul class="list-disc list-inside mb-4 mt-2">
               <li>No artificial limits.</li>
               <li>No daily swipe caps.</li>
@@ -297,12 +291,12 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
           class="flex-1 bg-[#ffecd5] px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16 xl:py-20 rounded-xl shadow-2xl flex flex-col gap-2 justify-center items-center hover:translate-y-[-10px] transition-all duration-300 relative top-0 left-0"
         >
           <h4
-            class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-['Fellix',_sans-serif] my-3 md:my-4 lg:my-6 text-left"
+            class="font-['Fellix',_sans-serif] my-3 md:my-4 lg:my-6 text-center lg:text-4xl w-full text-2xl sm:text-4xl"
           >
             Merit Over Credentials
           </h4>
           <p
-            class="text-base md:text-lg lg:text-xl font-['Fellix',_sans-serif] flex flex-col gap-4 md:gap-6 lg:gap-8 text-left"
+            class="font-['Fellix',_sans-serif] flex flex-col gap-4 md:gap-6 lg:gap-8 text-left"
           >
             <span class="font-bold block"
               >Show your GitHub, not your diploma.</span
@@ -314,13 +308,11 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
           class="flex-1 bg-[#ffecd5] px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16 xl:py-20 rounded-xl shadow-2xl flex flex-col gap-2 justify-center items-center hover:translate-y-[-10px] transition-all duration-300"
         >
           <h4
-            class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-['Fellix',_sans-serif] my-3 md:my-4 lg:my-6 text-left"
+            class="font-['Fellix',_sans-serif] my-3 md:my-4 lg:my-6 text-center lg:text-4xl w-full text-2xl sm:text-4xl"
           >
             Built for Every Founder
           </h4>
-          <p
-            class="text-base md:text-lg lg:text-xl font-['Fellix',_sans-serif] text-left"
-          >
+          <p class="font-['Fellix',_sans-serif] text-left">
             Stop worrying that you're not cut from the same boring cloth.
             Whether you're introverted, international, or unconventional—there's
             a place for you here.
