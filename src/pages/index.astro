@@ -67,18 +67,17 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
 
 <Layout>
   <section
-    class="relative flex flex-col pl-32 py-32 h-screen w-screen bg-[url('/src/assets/bg.svg')] bg-[#FEEDCC]! bg-cover bg-no-repeat bg-center overflow-hidden"
+    class="relative flex flex-col px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12 sm:py-16 md:py-20 lg:py-28 xl:py-32 min-h-screen w-full bg-[#FEEDCC] overflow-hidden"
   >
-    <!-- Faint Dots Pattern Overlay -->
+    <!-- Background Pattern -->
     <div
-      class="absolute inset-0 z-0 pointer-events-none"
-      style="background-image: url('data:image/svg+xml;utf8,<svg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'><circle cx=\'2\' cy=\'2\' r=\'2\' fill=\'%23FBBF24\' fill-opacity=\'0.08\'/><circle cx=\'38\' cy=\'38\' r=\'2\' fill=\'%23FBBF24\' fill-opacity=\'0.08\'/></svg>'); background-size: 40px 40px; opacity:0.5;"
+      class="absolute inset-0 z-0 pointer-events-none bg-[url('/src/assets/bg.svg')] bg-cover bg-center"
     >
     </div>
 
-    <!-- Floating UI Cards -->
+    <!-- Floating Founder Card - Only on larger screens -->
     <div
-      class="absolute bottom-[5%] -right-[7%] -translate-x-1/2 z-30 w-64 p-4 bg-white/30 rounded-xl shadow-lg border border-gray-200 backdrop-blur-md"
+      class="hidden xl:block absolute bottom-[2%] right-[5%] z-30 w-64 p-4 bg-white/80 rounded-xl shadow-lg border border-gray-200 backdrop-blur-sm"
     >
       <div class="flex items-center gap-3">
         <img
@@ -97,13 +96,15 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
         "Looking for a technical cofounder!"
       </div>
     </div>
+    <!-- Simple bubble - Show on medium+ -->
     <div
-      class="absolute bottom-[150px] left-[320px] z-20 w-40 p-3 bg-white/30 rounded-lg shadow border border-gray-100 backdrop-blur"
+      class="hidden lg:block absolute bottom-[10%] left-[15%] z-20 w-40 p-3 bg-white/70 rounded-lg shadow border border-gray-100 backdrop-blur-sm"
     >
       <div class="text-xs font-semibold">💬 "Let's connect!"</div>
     </div>
+    <!-- Challenge Card - Only on XL screens -->
     <div
-      class="absolute bottom-24 right-32 z-20 w-96 max-w-xs p-6 bg-white/50 rounded-2xl shadow-xl border border-gray-200 backdrop-blur-lg flex flex-col gap-2"
+      class="hidden xl:flex absolute right-28 bottom-24 z-20 w-96 max-w-xs p-6 bg-white/90 rounded-2xl shadow-xl border border-gray-200 backdrop-blur-sm flex-col gap-2"
     >
       <div class="font-bold text-lg text-[#FBBF24]">
         🚀 Build a Mobile MVP, Fast!
@@ -138,21 +139,16 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
       </button>
     </div>
 
-    <!-- Chained Conversation Bubbles (Feature-focused, no tech logos) -->
+    <!-- Keep one conversation bubble on large screens -->
     <div
-      class="absolute bottom-1/4 left-[18%] z-20 w-44 p-3 bg-white/30 rounded-lg shadow border border-gray-100 backdrop-blur"
+      class="hidden xl:block absolute bottom-32 left-[10%] z-20 w-44 p-3 bg-white/70 rounded-lg shadow border border-gray-100 backdrop-blur-sm"
     >
       <div class="text-xs font-semibold">"I've got this idea…"</div>
     </div>
+    <!-- Search Bar - Show on large+ screens only -->
     <div
-      class="absolute top-[12%] right-[26%] z-20 w-38 p-3 bg-white/30 rounded-lg shadow border border-gray-100 backdrop-blur"
+      class="hidden lg:flex absolute top-[32%] right-[20%] xl:right-[30%] 2xl:right-[30%] z-20 w-[45%] xl:w-[40%] 2xl:w-[35%] max-w-lg p-0 bg-transparent items-center"
     >
-      <div class="text-xs font-semibold">"Looking to raise!"</div>
-    </div>
-    <div
-      class="absolute bottom-[64%] right-[30%] z-[60] w-[500px] p-0 bg-transparent flex items-center"
-    >
-      <!-- Computer Mouse Icon -->
       <span class="inline-flex items-center justify-center w-8 h-8 ml-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -172,36 +168,38 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
       <!-- Search Bar Mockup -->
       <input
         type="text"
-        value="Show me founders with real-world skills, not just credentials"
+        value="Show me founders with real-world skills"
         readonly
-        class="bg-white/30 border border-gray-200 rounded-full shadow text-sm font-medium w-full px-4 py-2 ml-2 text-gray-700 placeholder-gray-400 focus:outline-none cursor-default"
+        class="bg-white/70 border border-gray-200 rounded-full shadow text-sm font-medium w-full px-4 py-2.5 ml-2 text-gray-700 placeholder-gray-400 focus:outline-none cursor-default"
         style="pointer-events: none;"
       />
     </div>
 
     <!-- Main Hero Content -->
     <div
-      class="flex flex-col items-start max-w-4xl text-left text-wrap z-10 relative"
+      class="flex flex-col items-start max-w-full lg:max-w-3xl xl:max-w-4xl text-left z-10 relative mt-8 sm:mt-12 md:mt-16 lg:mt-0"
     >
       <h1
-        class="text-[96px] font-regular tracking-tight font-['Fellix',_sans-serif] leading-[1] text-[#2A2A2A]"
+        class="text-[40px] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[96px] font-regular tracking-tight font-['Fellix',_sans-serif] leading-[0.9] text-[#2A2A2A]"
       >
         Some Assembly Required
       </h1>
       <p
-        class="text-[24px] max-w-2xl font-['Fellix',_sans-serif] pt-6 text-[#2A2A2A]"
+        class="text-base sm:text-lg md:text-xl lg:text-2xl max-w-full sm:max-w-xl lg:max-w-2xl font-['Fellix',_sans-serif] pt-4 sm:pt-5 md:pt-6 text-[#2A2A2A]/80 leading-relaxed"
       >
         Stop networking. Start building. The first founder platform designed for
         doing, not just talking. Find your missing pieces and create something
         extraordinary.
       </p>
-      <div class="flex gap-2 font-['Fellix',_sans-serif] pt-4">
+      <div
+        class="flex flex-col sm:flex-row gap-3 font-['Fellix',_sans-serif] pt-6 sm:pt-8"
+      >
         <button
-          class="bg-[#FBBF24] text-white text-md px-4 py-1.5 rounded shadow hover:bg-yellow-400 transition"
+          class="bg-[#FBBF24] text-white text-base font-medium px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 transition-all hover:shadow-lg w-full sm:w-auto"
           >Get Started</button
         >
         <button
-          class="bg-white text-[#2A2A2A]text-md px-4 py-1.5 rounded shadow hover:bg-yellow-400 hover:text-white transition"
+          class="bg-white text-[#2A2A2A] text-base font-medium px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 hover:text-white transition-all hover:shadow-lg w-full sm:w-auto"
           >Learn More</button
         >
       </div>
@@ -210,114 +208,149 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
 
   <!-- Creative Problem/Solution Timeline Section -->
   <section
-    class="relative w-screen min-h-screen bg-[#FEEDCC] pt-32 px-4 flex flex-col overflow-x-clip"
+    class="relative w-full min-h-screen bg-[#FEEDCC] pt-8 md:pt-16 lg:pt-24 xl:pt-32 px-4 flex flex-col overflow-x-clip"
   >
     <div
-      class="flex flex-col pl-24 pr-32 pt-20 pb-64 rounded-3xl text-white bg-amber-950"
+      class="flex flex-col px-4 md:px-8 lg:px-16 xl:px-24 pr-4 md:pr-8 lg:pr-16 xl:pr-32 pt-8 md:pt-12 lg:pt-16 xl:pt-20 pb-16 md:pb-32 lg:pb-24 rounded-3xl text-white bg-amber-950"
     >
       <h2
-        class="text-[96px] relative font-['Fellix',_sans-serif] pt-12 text-white text-shadow-2xl pb-20"
+        class="text-4xl md:text-6xl lg:text-7xl xl:text-[96px] relative font-['Fellix',_sans-serif] pt-4 md:pt-8 lg:pt-12 text-white text-shadow-2xl pb-8 md:pb-12 lg:pb-16 xl:pb-20"
       >
         What's the deal?
       </h2>
       <div
-        class="bg-amber-600 p-20 rounded-xl drop-shadow-lg flex flex-col gap-2 w-[90%] relative z-20"
+        class="bg-amber-600 p-4 md:p-8 lg:p-12 xl:p-20 rounded-xl drop-shadow-lg flex flex-col gap-2 w-full lg:w-[95%] xl:w-[90%] relative z-20 mb-4 lg:mb-0"
       >
-        <h3 class="text-5xl font-['Fellix',_sans-serif]">
+        <h3
+          class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-['Fellix',_sans-serif]"
+        >
           Tired of swiping for the most important decisions in your life?
         </h3>
-        <p class="text-xl font-['Fellix',_sans-serif]">
+        <p class="text-base md:text-lg lg:text-xl font-['Fellix',_sans-serif]">
           Skip the games. Browse founders like a database, filter by real
           skills, and connect with purpose.
         </p>
       </div>
       <div
-        class="bg-amber-700 p-20 pr-32 rounded-xl w-[95%] drop-shadow-xl flex flex-col gap-2 relative bottom-10 ml-10 z-10"
+        class="bg-amber-700 p-4 md:p-8 lg:p-12 xl:p-20 pr-4 md:pr-8 lg:pr-16 xl:pr-32 rounded-xl w-full lg:w-[98%] xl:w-[95%] drop-shadow-xl flex flex-col gap-2 relative lg:-mt-6 xl:bottom-10 ml-0 lg:ml-6 xl:ml-10 z-10 mb-4 lg:mb-0"
       >
-        <h3 class="text-5xl font-['Fellix',_sans-serif] pt-4">
-          Went down a different walk of life that gave you skills without
-          credentials?
+        <h3
+          class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-['Fellix',_sans-serif] pt-2 md:pt-4"
+        >
+          Walked a different path that gave you skills not credentials?
         </h3>
-        <p class="text-xl font-['Fellix',_sans-serif]">
-          We empower founders to prove their worth through real-world
-          challenges, peer review, and portfolio verification.
+        <p class="text-base md:text-lg lg:text-xl font-['Fellix',_sans-serif]">
+          Prove your worth through real-world challenges, peer review, and
+          portfolio verification.
         </p>
       </div>
       <div
-        class="bg-amber-800 p-20 rounded-xl w-[100%] drop-shadow-lg flex flex-col gap-2 relative ml-20 z-0 bottom-20"
+        class="bg-amber-800 p-4 md:p-8 lg:p-12 xl:p-20 rounded-xl w-full drop-shadow-lg flex flex-col gap-2 relative ml-0 lg:ml-12 xl:ml-20 z-0 lg:-mt-12"
       >
-        <h3 class="text-5xl font-['Fellix',_sans-serif] pt-4">
-          Had enough of trying to play by the same old stale handbook?
+        <h3
+          class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-['Fellix',_sans-serif] pt-2 md:pt-4"
+        >
+          Had enough of the same old playbook?
         </h3>
-        <p class="text-xl font-['Fellix',_sans-serif]">
-          Founders are trailblazers, not copycats. We give you the tools to
-          write your own playbook and hit it out of the park.
+        <p class="text-base md:text-lg lg:text-xl font-['Fellix',_sans-serif]">
+          Founders are trailblazers, not copycats. Write your own playbook and
+          hit it out of the park.
         </p>
       </div>
     </div>
     <div
-      class="grid grid-cols-3 gap-x-8 translate-y-[-50%] px-12 text-[#2A2A2A]"
+      class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-col gap-4 md:gap-6 lg:gap-8 mt-8 px-4 md:px-8 lg:px-12 text-[#2A2A2A]"
     >
-      <div
-        class="bg-[#ffecd5] px-8 py-20 rounded-xl shadow-2xl flex flex-col gap-2 justify-center items-center hover:translate-y-[-10px] transition-all duration-300 relative top-0 left-0"
-      >
-        <h4 class="text-5xl font-['Fellix',_sans-serif] my-6">
-          Merit Over Credentials
-        </h4>
-        <p class="text-xl font-['Fellix',_sans-serif] flex flex-col gap-8">
-          <span class="font-bold block"
-            >Show your GitHub, not your diploma.</span
-          >Here, founders are judged on real skills and actual work, not where
-          they went to school.
-        </p>
-      </div>
-      <div
-        class="bg-[#ffecd5] px-8 rounded-xl shadow-2xl flex flex-col gap-2 justify-center items-center hover:translate-y-[-10px] transition-all duration-300"
-      >
-        <h4 class="text-5xl font-['Fellix',_sans-serif] mt-6">
-          Complete Freedom
-        </h4>
-        <div class="font-['Fellix',_sans-serif] text-xl">
-          <ul class="list-disc list-inside mb-4 mt-2">
-            <li>No artificial limits.</li>
-            <li>No daily swipe caps.</li>
-            <li>No algorithm.</li>
-          </ul>
-          <span class="block"
-            >Browse and filter the entire founder database based on your needs
-            and discover connections at your own pace.</span
+      <div>
+        <div class="flex flex-col gap-4 justify-center items-center">
+          <h2
+            class="text-4xl md:text-5xl lg:text-6xl xl:text-[80px] 2xl:text-[96px] font-['Fellix',_sans-serif] text-[#2A2A2A] leading-tight"
           >
+            What's different about Cira?
+          </h2>
         </div>
       </div>
-      <div
-        class="bg-[#ffecd5] px-8 py-20 rounded-xl shadow-2xl flex flex-col gap-2 justify-center items-center hover:translate-y-[-10px] transition-all duration-300"
-      >
-        <h4 class="text-5xl font-['Fellix',_sans-serif] my-6">
-          Built for Every Founder
-        </h4>
-        <p class="text-xl font-['Fellix',_sans-serif]">
-          Stop worrying that you're not cut from the same boring cloth. Whether
-          you're introverted, international, or unconventional—there's a place
-          for you here.
-        </p>
+      <div class="flex flex-col lg:flex-row gap-4">
+        <div
+          class="flex-1 bg-[#ffecd5] px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16 xl:py-20 rounded-xl shadow-2xl flex flex-col gap-2 justify-center items-center hover:translate-y-[-10px] transition-all duration-300"
+        >
+          <h4
+            class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-['Fellix',_sans-serif] mt-3 md:mt-4 lg:mt-6 text-left"
+          >
+            Complete Freedom
+          </h4>
+          <div
+            class="font-['Fellix',_sans-serif] text-base md:text-lg lg:text-xl text-left"
+          >
+            <ul class="list-disc list-inside mb-4 mt-2">
+              <li>No artificial limits.</li>
+              <li>No daily swipe caps.</li>
+              <li>No algorithm.</li>
+            </ul>
+            <span class="block"
+              >Browse and filter the entire founder database based on your needs
+              and discover connections at your own pace.</span
+            >
+          </div>
+        </div>
+        <div
+          class="flex-1 bg-[#ffecd5] px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16 xl:py-20 rounded-xl shadow-2xl flex flex-col gap-2 justify-center items-center hover:translate-y-[-10px] transition-all duration-300 relative top-0 left-0"
+        >
+          <h4
+            class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-['Fellix',_sans-serif] my-3 md:my-4 lg:my-6 text-left"
+          >
+            Merit Over Credentials
+          </h4>
+          <p
+            class="text-base md:text-lg lg:text-xl font-['Fellix',_sans-serif] flex flex-col gap-4 md:gap-6 lg:gap-8 text-left"
+          >
+            <span class="font-bold block"
+              >Show your GitHub, not your diploma.</span
+            >Here, founders are judged on real skills and actual work, not where
+            they went to school.
+          </p>
+        </div>
+        <div
+          class="flex-1 bg-[#ffecd5] px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16 xl:py-20 rounded-xl shadow-2xl flex flex-col gap-2 justify-center items-center hover:translate-y-[-10px] transition-all duration-300"
+        >
+          <h4
+            class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-['Fellix',_sans-serif] my-3 md:my-4 lg:my-6 text-left"
+          >
+            Built for Every Founder
+          </h4>
+          <p
+            class="text-base md:text-lg lg:text-xl font-['Fellix',_sans-serif] text-left"
+          >
+            Stop worrying that you're not cut from the same boring cloth.
+            Whether you're introverted, international, or unconventional—there's
+            a place for you here.
+          </p>
+        </div>
       </div>
     </div>
   </section>
   <section
-    class="pb-32 min-h-screen flex items-start justify-start bg-[#FEEDCC]"
+    class="py-16 md:py-20 lg:py-24 xl:py-32 min-h-screen flex items-start justify-start bg-[#FEEDCC]"
   >
-    <div class="w-full relative flex flex-col gap-8 items-end">
-      <div class="flex flex-col max-w-7xl items-end">
-        <div class="flex flex-col items-end mr-24 max-w-2xl">
+    <div class="w-full relative flex flex-col gap-8 md:gap-12 lg:gap-16">
+      <div
+        class="ml-12 flex flex-col max-w-7xl lg:max-w-none items-start lg:items-start px-4 sm:px-6 md:px-12 lg:px-8 mb-8 md:mb-12"
+      >
+        <div
+          class="flex flex-col items-start lg:items-start text-left mr-0 lg:mr-16 xl:mr-24 max-w-2xl lg:max-w-4xl"
+        >
           <h2
-            class="text-[96px] font-['Fellix',_sans-serif] text-left text-[#2A2A2A] leading-tight lg:whitespace-nowrap"
+            class="text-4xl md:text-5xl lg:text-6xl xl:text-[80px] 2xl:text-[96px] font-['Fellix',_sans-serif] text-[#2A2A2A] leading-tight"
           >
             The <span class="text-amber-400 font-bold">Almost Investors</span
-            ><span class="block text-[#2A2A2A] text-4xl text-right"
+            ><span
+              class="block text-[#2A2A2A] text-lg md:text-xl lg:text-2xl xl:text-3xl mt-2"
               >So close to backing the next big thing</span
             >
           </h2>
-          <p class="text-xl font-['Fellix',_sans-serif] text-left pt-4">
+          <p
+            class="text-base md:text-lg lg:text-xl font-['Fellix',_sans-serif] pt-4"
+          >
             Rejections represent trillions in missed returns from investors who
             chase credentials over creativity. While they stick to their tired
             playbook, the next generation of unicorns is building in plain
@@ -329,84 +362,114 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
             who wouldn't recognize innovation if it came with a Harvard MBA.
           </p>
           <span
-            class="block mt-2 text-xl font-bold font-['Fellix',_sans-serif] self-start"
+            class="block mt-2 text-base md:text-lg lg:text-xl font-bold font-['Fellix',_sans-serif] self-start"
             >Your weird is our wonderful.</span
           >
         </div>
       </div>
-      <div class="flex flex-col gap-8 items-end justify-center">
+      <!-- Rejection Cards Section -->
+      <div class="flex flex-col lg:flex-row gap-0 lg:gap-12 w-full">
+        <!-- Left side - Rejection Collection -->
         <div
-          class="w-fit relative rounded-l-2xl p-12 bg-amber-950 text-white m-24 mr-0"
+          class="flex flex-col gap-4 bg-amber-950 p-6 md:p-8 lg:p-12 lg:pl-0 rounded-none lg:rounded-r-2xl lg:w-1/3 border-b-4 border-amber-900 lg:border-b-0"
+        >
+          <div class="flex flex-col gap-2 lg:pl-6">
+            <h2
+              class="text-2xl md:text-3xl lg:text-4xl font-['Fellix',_sans-serif] text-white leading-tight"
+            >
+              The Rejection Collection
+            </h2>
+            <p
+              class="text-base md:text-lg font-['Fellix',_sans-serif] text-white"
+            >
+              Greatest hits from the gatekeepers who missed the memo.
+            </p>
+          </div>
+          <div class="space-y-3">
+            {RejectCards.map((card) => <RejectCard {...card} />)}
+          </div>
+        </div>
+
+        <!-- Right side - Catch-22 Compilation -->
+        <div
+          class="flex-1 h-fit bg-amber-950 text-white rounded-none lg:rounded-l-2xl p-6 md:p-8 lg:p-12"
         >
           <div class="relative">
             <h2
-              class="text-[48px] font-['Fellix',_sans-serif] p-6 pb-0 leading-tight"
+              class="text-2xl md:text-3xl lg:text-4xl xl:text-[48px] font-['Fellix',_sans-serif] p-4 md:p-6 pb-2 leading-tight"
             >
               The Catch-22 Compilation
             </h2>
             <div class="flex items-center justify-center">
               <span
-                class="text-[72px] absolute left-0 -top-20 -rotate-16 drop-shadow-2xl"
+                class="text-[48px] md:text-[60px] lg:text-[72px] absolute left-0 -top-12 md:-top-16 lg:-top-20 -rotate-16 drop-shadow-2xl"
                 >🗑️</span
               >
               <span
-                class="text-[72px] absolute right-0 -top-16 rotate-12 drop-shadow-2xl"
+                class="text-[48px] md:text-[60px] lg:text-[72px] absolute right-0 -top-10 md:-top-14 lg:-top-16 rotate-12 drop-shadow-2xl"
                 >🤡</span
               >
             </div>
-            <h4 class="text-2xl font-['Fellix',_sans-serif] p-6 pt-0">
+            <h4
+              class="text-base md:text-lg lg:text-xl font-['Fellix',_sans-serif] p-4 md:p-6 pt-0"
+            >
               It's time to start making sense.
             </h4>
           </div>
           <ul
-            class="list-none list-inside text-xl font-['Fellix',_sans-serif] flex flex-col gap-4"
+            class="list-none list-inside text-sm md:text-base lg:text-lg font-['Fellix',_sans-serif] flex flex-col gap-3 md:gap-4 px-2"
           >
             <li
-              class="p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-2"
+              class="p-2 md:p-3 lg:p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-1 md:gap-2"
             >
               <span class="block">Warm introductions only.</span>
-              <span class="block text-sm bg-amber-800 text-white rounded-lg p-4"
+              <span
+                class="block text-xs md:text-sm bg-amber-800 text-white rounded-lg p-2 md:p-3 lg:p-4"
                 >Translation: I need you to know people you don't know.</span
               >
             </li>
             <li
-              class="p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-2"
+              class="p-2 md:p-3 lg:p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-1 md:gap-2"
             >
               <span class="block"> Traction required to get traction.</span>
-              <span class="block text-sm bg-amber-800 text-white rounded-lg p-4"
+              <span
+                class="block text-xs md:text-sm bg-amber-800 text-white rounded-lg p-2 md:p-3 lg:p-4"
                 >Translation: Build a product that people want before you have
                 the resources to build it.</span
               >
             </li>
             <li
-              class="p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-2"
+              class="p-2 md:p-3 lg:p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-1 md:gap-2"
             >
               <span class="block">
                 Need a team to get funding to hire a team.</span
               >
-              <span class="block text-sm bg-amber-800 text-white rounded-lg p-4"
+              <span
+                class="block text-xs md:text-sm bg-amber-800 text-white rounded-lg p-2 md:p-3 lg:p-4"
                 >Translation: Be rich enough to work for free while recruiting
                 other people to also work for free.</span
               >
             </li>
             <li
-              class="p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-2"
+              class="p-2 md:p-3 lg:p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-1 md:gap-2"
             >
               <span class="block">
                 Prove market fit before building product.
               </span>
-              <span class="block text-sm bg-amber-800 text-white rounded-lg p-4"
+              <span
+                class="block text-xs md:text-sm bg-amber-800 text-white rounded-lg p-2 md:p-3 lg:p-4"
                 >Translation: Convince people to buy something that doesn't
                 exist yet.</span
               >
             </li>
             <li
-              class="p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-2"
+              class="p-2 md:p-3 lg:p-4 bg-amber-700 rounded-xl hover:shadow-xl transition-all duration-300 flex flex-col gap-1 md:gap-2"
             >
               <span class="block">
                 Must have paying customers to get funding.
               </span>
-              <span class="block text-sm bg-amber-800 text-white rounded-lg p-4"
+              <span
+                class="block text-xs md:text-sm bg-amber-800 text-white rounded-lg p-2 md:p-3 lg:p-4"
                 >Translation: Bootstrap to profitability, then we'll give you
                 money you no longer desperately need.</span
               >
@@ -414,41 +477,26 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
           </ul>
         </div>
       </div>
-      <div
-        class="flex flex-col gap-4 absolute top-0 mt-40 left-0 bg-amber-950 p-12 pl-0 rounded-r-2xl"
-      >
-        <div class="flex flex-col gap-2 pl-6 mb-2">
-          <h2
-            class="text-[48px] font-['Fellix',_sans-serif] text-white leading-tight"
-          >
-            The Rejection Collection
-          </h2>
-          <p class="text-xl font-['Fellix',_sans-serif] text-white">
-            Greatest hits from the gatekeepers who missed the memo.
-          </p>
-        </div>
-        {RejectCards.map((card) => <RejectCard {...card} />)}
-      </div>
     </div>
   </section>
-  <section class="min-h-screen pb-24 bg-[#FEEDCC]">
+  <section class="min-h-screen py-16 md:py-20 lg:py-24 bg-[#FEEDCC]">
     <div
-      class="w-full h-full flex justify-center items-center font-['Montez',_sans-serif]"
+      class="w-full h-full flex justify-start lg:justify-center items-center font-['Montez',_sans-serif] px-4 sm:px-6 md:px-12 lg:px-8"
     >
       <div
-        class="bg-[ghostwhite] p-24 w-[fit] h-[90%] rounded-2xl flex flex-col gap-8 shadow-2xl"
+        class="bg-[ghostwhite] p-6 sm:p-8 md:p-12 lg:p-16 xl:p-24 w-full max-w-4xl rounded-2xl flex flex-col gap-4 md:gap-6 lg:gap-8 shadow-2xl"
       >
         <h2
-          class="text-[96px] font-['Montez',_sans-serif] text-left text-[#2A2A2A] leading-tight lg:whitespace-nowrap font-bold"
+          class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[80px] font-['Montez',_sans-serif] text-left text-[#2A2A2A] leading-tight font-bold"
         >
           {manifestoTitle}
         </h2>
         <h3
-          class="text-3xl font-['Montez',_sans-serif] text-left text-[#2A2A2A] leading-tight lg:whitespace-nowrap font-bold"
+          class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-['Montez',_sans-serif] text-left text-[#2A2A2A] leading-tight font-bold"
         >
           {manifestoSubtitle}
         </h3>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-2 md:gap-3 lg:gap-4">
           {
             clauses.map((clause) => {
               // Regex to match the emoji at the start (handles most emoji cases)
@@ -465,11 +513,11 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
                 text = clause;
               }
               return (
-                <p class="text-3xl p-4 border-b border-gray-300 text-left">
+                <p class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl py-3 px-2 sm:p-3 md:p-4 border-b border-gray-300 text-left">
                   <span class="inline-flex items-center">
                     <span
-                      class="mr-3"
-                      style="width: 2em; display: inline-block; text-align: center;"
+                      class="mr-2 sm:mr-3 text-xl sm:text-2xl"
+                      style="width: 1.5em; display: inline-block; text-align: center;"
                     >
                       {emoji}
                     </span>
@@ -480,23 +528,31 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
             })
           }
         </div>
-        <p class="text-4xl mt-6 text-left font-['Montez',_sans-serif]">
+        <p
+          class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mt-4 md:mt-6 text-left font-['Montez',_sans-serif]"
+        >
           {manifestoClosingLine}
         </p>
-        <div class="flex items-center mt-8 mb-2 relative">
+        <div class="flex items-center mt-4 md:mt-6 lg:mt-8 mb-2 relative">
           <span
-            class="text-2xl text-[#2A2A2A] font-thin mr-2 relative bottom-1 select-none font-['Fellix',_sans-serif]"
+            class="text-xl md:text-2xl text-[#2A2A2A] font-thin mr-2 relative bottom-1 select-none font-['Fellix',_sans-serif]"
             >X</span
           >
           <span class="flex-1 border-t border-gray-300"></span>
-          <div class="flex justify-end absolute -top-10 left-10">
-            <img src={signature.src} alt="Signature" class="h-12 mt-2" />
+          <div
+            class="flex justify-end absolute -top-6 md:-top-8 lg:-top-10 left-8 sm:left-4 md:left-6 lg:left-10"
+          >
+            <img
+              src={signature.src}
+              alt="Signature"
+              class="h-8 md:h-10 lg:h-12 mt-1 md:mt-2"
+            />
           </div>
         </div>
       </div>
     </div>
   </section>
-  <section
+  <!-- <section
     class="min-h-screen pb-32 bg-[#FEEDCC] bg-[url('/src/assets/vs.svg')] bg-contain bg-no-repeat bg-bottom"
   >
     <div class="flex flex-col max-w-7xl ml-40 mb-12 pt-32">
@@ -544,6 +600,22 @@ const manifestoClosingLine = "This is our declaration of independence from BS.";
         </div>
         <ProfileCira client:load />
       </div>
+    </div>
+  </section> -->
+  <section class="bg-[#FEEDCC] pb-24">
+    <div
+      class="leading-[1] bg-[#FEEDCC] flex flex-col items-center justify-center"
+    >
+      <h2
+        class="font-semibold text-[150px] md:text-[200px] lg:text-[400px] font-['Fellix',_sans-serif] text-[#ffd581]"
+      >
+        Cira
+      </h2>
+      <h3
+        class="text-2xl md:text-3xl lg:text-4xl font-['Fellix',_sans-serif] text-[#ffd581] leading-[0.8] mt-4"
+      >
+        Connect. Create. Cultivate.
+      </h3>
     </div>
   </section>
 </Layout>
